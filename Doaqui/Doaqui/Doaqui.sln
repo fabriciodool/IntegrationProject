@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Doaqui", "Doaqui\Doaqui.csproj", "{9643A5FE-CA3D-4FE8-8849-FA1FDAAF341F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoaquiTest", "DoaquiTest\DoaquiTest.csproj", "{AE96A09E-E07B-4077-9551-15953A1C835A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9643A5FE-CA3D-4FE8-8849-FA1FDAAF341F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9643A5FE-CA3D-4FE8-8849-FA1FDAAF341F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9643A5FE-CA3D-4FE8-8849-FA1FDAAF341F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9643A5FE-CA3D-4FE8-8849-FA1FDAAF341F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE96A09E-E07B-4077-9551-15953A1C835A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE96A09E-E07B-4077-9551-15953A1C835A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE96A09E-E07B-4077-9551-15953A1C835A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE96A09E-E07B-4077-9551-15953A1C835A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EE011D7B-883B-4233-91C1-C124F8F1C829}
+	EndGlobalSection
+EndGlobal
