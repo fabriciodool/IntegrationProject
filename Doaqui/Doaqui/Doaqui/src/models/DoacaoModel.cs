@@ -25,8 +25,6 @@ namespace Doaqui.src.models
 
         [Required, StringLength(14)]
         public string CNPJ_Doador { get; set; }
-        
-        [JsonIgnore]
-        public List<VendaModel> MinhasVendas { get; set; }
+          
     }
 }
