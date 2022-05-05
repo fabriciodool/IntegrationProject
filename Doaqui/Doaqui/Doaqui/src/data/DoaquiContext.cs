@@ -1,4 +1,4 @@
-using Doaqui.src.modelos;
+using Doaqui.src.models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Doaqui.src.data
