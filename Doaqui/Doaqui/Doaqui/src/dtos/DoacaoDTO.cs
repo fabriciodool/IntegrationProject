@@ -2,18 +2,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Doaqui.src.modelos
 { 
- /// <summary>
-    /// <para>Resumo: Classe espelho para cria nova postagem</para>
+    /// <summary>
+    /// <para>Resumo: Classe espelho para cria nova postagem de doação</para>
     /// <para>Criado por: Renata Nunes</para>
-    /// <para>Versão: 1.0</para>
+    /// <para>Versão: 2.0</para>
     /// <para>Data: 05/05/2022</para>
     /// </summary>
     public class NovaDoacaoDTO
     {
-       
-        [Required, StringLength(30)]
-        public int Id { get; set; }
-
         [Required, StringLength(100)]
         public string Contato{ get; set; }
 
@@ -23,30 +19,37 @@ namespace Doaqui.src.modelos
         [Required, StringLength(30)]
         public string Validade  { get; set; }
 
-        [Required]
-        public string DescricaoVenda { get; set; }
+        [Required, StringLength(100)]
+        public string DescricaoDoacao { get; set; }
+        
+        [Required, StringLength(14)]
+        public string CNPJ_Doador { get; set; }
 
-        public NovaDoacaoDTO(int id, string contato, int quantidade, string validade, string descricaovenda)
+        public NovaDoacaoDTO(string contato, int quantidade, string validade, string descricaoDoacao, string cnpjDoador)
         {
-            Id = id;
             Contato = contato;
             Quantidade = quantidade;
             Validade = validade;
-            DescricaoVenda = descricaovenda;
+            DescricaoDoacao = descricaoDoacao;
+            CNPJ_Doador = cnpjDoador;
         }
     }
+
     /// <summary>
-    /// <para>Resumo: Classe espelho para alterar uma postagem</para>
+    /// <para>Resumo: Classe espelho para alterar uma doacao</para>
     /// <para>Criado por: Renata Nunes</para>
-    /// <para>Versão: 1.0</para>
+    /// <para>Versão: 2.0</para>
     /// <para>Data: 05/05/2022</para>
     /// </summary>
-    public class AtualizarVendaDTO
+    public class AtualizarDoacaoDTO
     {
-        [Required, StringLength(30)]
+        [Required]
         public int Id { get; set; }
 
-       [Required, StringLength(100)]
+        [Required]
+        public int CNPJ_Doador { get; }
+
+        [Required, StringLength(100)]
         public string Contato{ get; set; }
        
         [Required]
@@ -55,16 +58,15 @@ namespace Doaqui.src.modelos
         [Required, StringLength(30)]
         public string Validade  { get; set; }
 
-       [Required]
-        public string DescricaoVenda { get; set; }
+        [Required, StringLength(30)]
+        public string DescricaoDoacao { get; set; }
 
-        public AtualizarVendaDTO(string contato, int quantidade, string validade, string descricaovenda)
+        public AtualizarDoacaoDTO(string contato, int quantidade, string validade, string descricaoDoacao)
         {
-
             Contato = contato;
             Quantidade = quantidade;
             Validade = validade;
-            DescricaoVenda = descricaovenda;
+            DescricaoDoacao = descricaoDoacao;
         }
     }
 }
