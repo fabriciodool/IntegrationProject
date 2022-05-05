@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace Doaqui.src.modelos
+namespace Doaqui.src.models
 {
     [Table("tb_Usuario")]
     public class UsuarioModel
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int CNPJ_ONG { get; set; }
 
         [Required, StringLength(50)]
@@ -20,13 +20,10 @@ namespace Doaqui.src.modelos
         [Required, StringLength(14)]
         public string Telefone { get; set; }
 
-        [Required, StringLength(14)]
+        [Required, StringLength(50)]
         public string Endereco { get; set; }
 
         [Required, StringLength(20)]
-        public string Senha { get; set; }
-        
-        [JsonIgnore]
-        public List<VendaModel> MinhasVendas { get; set; }
+        public string Senha { get; set; }  
     }
 }

@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Doaqui.src.modelos
+namespace Doaqui.src.models
 {
-    [Table("tb_venda")]
+    [Table("tb_Solicitacao")]
     public class VendaModel
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -1,4 +1,4 @@
-﻿namespace Doaqui.src.repositories
+namespace Doaqui.src.repositories
 {
     /// <summary>
     /// <para>Resumo: Responsavel por representar ações de CRUD de usuario</para>
@@ -10,3 +10,4 @@
     {
     }
 }
+

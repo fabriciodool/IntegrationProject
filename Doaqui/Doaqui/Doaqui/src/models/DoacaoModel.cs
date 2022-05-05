@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace Doaqui.src.modelos
+namespace Doaqui.src.models
 {
     [Table("tb_Doacao")]
     public class DoacaoModel
@@ -25,8 +25,6 @@ namespace Doaqui.src.modelos
 
         [Required, StringLength(14)]
         public string CNPJ_Doador { get; set; }
-        
-        [JsonIgnore]
-        public List<VendaModel> MinhasVendas { get; set; }
+          
     }
 }
