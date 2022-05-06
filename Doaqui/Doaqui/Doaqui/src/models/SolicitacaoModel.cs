@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Doaqui.src.models
 {
     [Table("tb_Solicitacao")]
-    public class VendaModel
+    public class SolicitacaoModel
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

@@ -9,16 +9,16 @@ namespace DoaquiTest.Test.data
     [TestClass]
     public class DoaquiContextTest
     {
-        private DoaquiContext _contexto;
+        private DoaquiContext _context;
         
         [TestInitialize]
-        public void inicio()
+        public void Inicio()
         {
             var opt = new DbContextOptionsBuilder<DoaquiContext>()
             .UseInMemoryDatabase(databaseName: "db_doaqui")
             .Options;
 
-            _contexto = new DoaquiContext(opt);
+            _context = new DoaquiContext(opt);
         }
     }
 }

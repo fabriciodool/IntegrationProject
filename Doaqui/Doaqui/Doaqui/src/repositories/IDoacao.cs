@@ -1,12 +1,23 @@
-using System;
+using Doaqui.src.models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Doaqui.src.repositories
 {
+
+    /// <summary>
+    /// <para> Summary: Represets all CRUD actions related to donations </para>
+    /// <para> Created by: Nickole Bueno </para>
+    /// <para> Version: 1.0 </para>
+    /// <para> Date: 05/05/2022 </para>
+    /// </summary>
     public interface IDoacao
     {
-        
+        public void NewDonation();
+        public void UpdateDonation();
+        public void DeleteDonation();
+        public DoacaoModel GetDonationById(int id);
+        public DoacaoModel GetDonationByCnpj(int cnpj);
+        public DoacaoModel GetDonationByContact(string contact);
+        public List<DoacaoModel> GetAllDonations();
     }
 }
