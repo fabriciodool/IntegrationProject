@@ -1,3 +1,4 @@
+using Doaqui.src.dtos;
 using Doaqui.src.models;
 using System.Collections.Generic;
 
@@ -12,9 +13,9 @@ namespace Doaqui.src.repositories
     /// </summary>
     public interface IDoacao
     {
-        public void NewDonation();
-        public void UpdateDonation();
-        public void DeleteDonation();
+        public void NewDonation(NovaDoacaoDTO donation);
+        public void UpdateDonation(AtualizarDoacaoDTO donation);
+        public void DeleteDonation(int id);
         public DoacaoModel GetDonationById(int id);
         public DoacaoModel GetDonationByCnpj(int cnpj);
         public DoacaoModel GetDonationByContact(string contact);

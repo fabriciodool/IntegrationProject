@@ -1,5 +1,4 @@
-
-
+using Doaqui.src.dtos;
 using Doaqui.src.models;
 using System.Collections.Generic;
 
@@ -14,9 +13,9 @@ namespace Doaqui.src.repositories
     /// </summary>
     public interface ISolicitacao
     {
-        public void NewRequest();
-        public void UpdateRequest();
-        public void DeleteRequest();
+        public void NewRequest(NovaSolicitacaoDTO request);
+        public void UpdateRequest(AtualizarSolicitacaoDTO request);
+        public void DeleteRequest(int id);
         public SolicitacaoModel GetRequestById(int id);
         public List<SolicitacaoModel> GetAllRequests();
     }

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations; 
 
-namespace Doaqui.src.modelos
+namespace Doaqui.src.dtos
 { 
     /// <summary>
     /// <para>Resumo: Classe espelho para cria nova postagem de doação</para>
