@@ -8,7 +8,8 @@ namespace Doaqui.src.models
     [Table("tb_Usuario")]
     public class UsuarioModel
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+        [Key]
         public int CNPJ_ONG { get; set; }
 
         [Required, StringLength(50)]

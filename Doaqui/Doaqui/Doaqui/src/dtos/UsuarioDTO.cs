@@ -48,7 +48,7 @@ namespace Doaqui.src.dtos
     public class AtualizarUsuarioDTO
     {
         [Required, StringLength(14)]
-        public string CNPJ_ONG { get; set; }
+        public int CNPJ_ONG { get; set; }
 
         [Required, StringLength(50)]
         public string Nome { get; set; }

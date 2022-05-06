@@ -23,9 +23,9 @@ namespace Doaqui.src.dtos
         public string DescricaoDoacao { get; set; }
         
         [Required, StringLength(14)]
-        public string CNPJ_Doador { get; set; }
+        public int CNPJ_Doador { get; set; }
 
-        public NovaDoacaoDTO(string contato, int quantidade, string validade, string descricaoDoacao, string cnpjDoador)
+        public NovaDoacaoDTO(string contato, int quantidade, string validade, string descricaoDoacao, int cnpjDoador)
         {
             Contato = contato;
             Quantidade = quantidade;

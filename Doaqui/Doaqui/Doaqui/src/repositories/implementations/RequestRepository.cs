@@ -2,6 +2,7 @@
 using Doaqui.src.dtos;
 using Doaqui.src.models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Doaqui.src.repositories.implementations
 {
@@ -31,27 +32,37 @@ namespace Doaqui.src.repositories.implementations
         #region Methods
         public void NewRequest(NovaSolicitacaoDTO request)
         {
+            _context.Solicitacoes.Add(new SolicitacaoModel
+            {
+                ONG = request.ONG,
+                Doacao = request.Doacao,
+            });
             _context.SaveChanges();
         }
 
         public void UpdateRequest(AtualizarSolicitacaoDTO request)
         {
+            SolicitacaoModel model = GetRequestById(request.Id);
+            model.ONG = request.ONG;
+            model.Doacao = request.Doacao;
+            _context.Update(model);
             _context.SaveChanges();
         }
 
         public void DeleteRequest(int id)
         {
+            _context.Solicitacoes.Remove(GetRequestById(id));
             _context.SaveChanges();
         }
 
         public SolicitacaoModel GetRequestById(int id)
         {
-
+            return _context.Solicitacoes.FirstOrDefault(r => r.Id == id);
         }
 
         public List<SolicitacaoModel> GetAllRequests()
         {
-            
+            return _context.Solicitacoes.ToList();
         }
         #endregion
 
