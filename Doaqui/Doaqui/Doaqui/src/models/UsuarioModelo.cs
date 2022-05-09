@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Doaqui.src.models
 {
-    [Table("tb_Usuario")]
+    [Table("tb_Usuarios")]
     public class UsuarioModelo
     {
 

@@ -17,7 +17,7 @@ namespace Doaqui.src.repositories
         public void AtualizarUsuario(AtualizarUsuarioDTO usuario);
         public void DeletarUsuario(int cnpj);
         public UsuarioModelo PegarUsuarioPeloCnpj(int cnpj);
-        public UsuarioModelo PegarUsuarioPeloNome(string nome);
+        List <UsuarioModelo> PegarUsuariosPeloNome(string nome);
         public UsuarioModelo PegarUsuarioPeloContato(string contato);
         public List<UsuarioModelo> PegarTodosUsuarios();
     }
