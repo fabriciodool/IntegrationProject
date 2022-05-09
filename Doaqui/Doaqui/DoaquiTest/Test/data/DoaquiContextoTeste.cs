@@ -7,24 +7,24 @@ using System.Linq;
 namespace DoaquiTest.Test.data
 {
     [TestClass]
-    public class DoaquiContextTest
+    public class DoaquiContextoTeste
     {
-        private DoaquiContext _context;
+        private DoaquiContexto _context;
         
         [TestInitialize]
         public void Inicio()
         {
-            DbContextOptions<DoaquiContext> opt = new DbContextOptionsBuilder<DoaquiContext>()
+            DbContextOptions<DoaquiContexto> opt = new DbContextOptionsBuilder<DoaquiContexto>()
             .UseInMemoryDatabase(databaseName: "db_doaqui")
             .Options;
 
-            _context = new DoaquiContext(opt);
+            _context = new DoaquiContexto(opt);
         }
 
         [TestMethod]
         public void InsertNewUserReturnsUser()
         {
-            UsuarioModel model = new UsuarioModel();
+            UsuarioModelo model = new UsuarioModelo();
             model.CNPJ_ONG = 000000000;
             model.Nome = "TestName";
             model.Email = "TestEmail";
@@ -39,7 +39,7 @@ namespace DoaquiTest.Test.data
         [TestMethod]
         public void InsertNewRequestReturnsRequest()
         {
-            SolicitacaoModel model = new SolicitacaoModel();
+            SolicitacaoModelo model = new SolicitacaoModelo();
             model.Id = 0;
             model.ONG = null;
             model.Doacao = null;
@@ -51,7 +51,7 @@ namespace DoaquiTest.Test.data
         [TestMethod]
         public void InsertNewDonationReturnsDonation()
         {
-            DoacaoModel model = new DoacaoModel();
+            DoacaoModelo model = new DoacaoModelo();
             model.Contato = "TestContact";
             model.Quantidade = 10000;
             model.Validade = "TestValidity";
