@@ -6,18 +6,18 @@ namespace Doaqui.src.repositories
 {
 
     /// <summary>
-    /// <para> Summary: Represets all CRUD actions related to requests </para>
+    /// <para> Summary: Representação do CRUD relacionado a usuarios </para>
     /// <para> Created by: Nickole Bueno </para>
     /// <para> Version: 1.0 </para>
     /// <para> Date: 05/05/2022 </para>
     /// </summary>
     public interface ISolicitacao
     {
-        public void NewRequest(NovaSolicitacaoDTO request);
-        public void UpdateRequest(AtualizarSolicitacaoDTO request);
-        public void DeleteRequest(int id);
-        public SolicitacaoModel GetRequestById(int id);
-        public List<SolicitacaoModel> GetAllRequests();
+        public void NovaSolicitacao(NovaSolicitacaoDTO solicitacao);
+        public void AtualizarSolicitacao(AtualizarSolicitacaoDTO solicitacao);
+        public void DeletarSolicitacao(int id);
+        public SolicitacaoModelo PegarSolicitacaoPeloId(int id);
+        public List<SolicitacaoModelo> PegarTodasSolicitacoes();
     }
 
 }

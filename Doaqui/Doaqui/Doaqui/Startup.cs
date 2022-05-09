@@ -26,7 +26,7 @@ namespace Doaqui
                 .AddJsonFile("appsettings.json")
                 .Build();
                 
-            services.AddDbContext<src.data.DoaquiContext>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<src.data.DoaquiContexto>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -35,12 +35,12 @@ namespace Doaqui
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, src.data.DoaquiContext context
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, src.data.DoaquiContexto contexto
 )
         {
             if (env.IsDevelopment())
             {
-                context.Database.EnsureCreated();
+                contexto.Database.EnsureCreated();
                 app.UseDeveloperExceptionPage();
 
                 app.UseDeveloperExceptionPage();

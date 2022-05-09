@@ -14,17 +14,17 @@ namespace Doaqui.src.dtos
 
     public class NovaSolicitacaoDTO
     {
-        public NovaSolicitacaoDTO(UsuarioModel ong, DoacaoModel doacao)
+        public NovaSolicitacaoDTO(UsuarioModelo ong, DoacaoModelo doacao)
         {
             ONG = ong;
             Doacao = doacao;
         }
 
         [Required]
-        public UsuarioModel ONG { get; set; }
+        public UsuarioModelo ONG { get; set; }
 
         [Required]
-        public DoacaoModel Doacao { get; set; }
+        public DoacaoModelo Doacao { get; set; }
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ namespace Doaqui.src.dtos
     /// </summary>
     public class AtualizarSolicitacaoDTO
     {
-        public AtualizarSolicitacaoDTO(int id, UsuarioModel ong, DoacaoModel doacao)
+        public AtualizarSolicitacaoDTO(int id, UsuarioModelo ong, DoacaoModelo doacao)
         {
             Id = id;
             ONG = ong;
@@ -46,9 +46,9 @@ namespace Doaqui.src.dtos
         public int Id { get; set; }
 
         [Required]
-        public UsuarioModel ONG { get; set; }
+        public UsuarioModelo ONG { get; set; }
 
         [Required]
-        public DoacaoModel Doacao { get; set; }
+        public DoacaoModelo Doacao { get; set; }
     }
 }

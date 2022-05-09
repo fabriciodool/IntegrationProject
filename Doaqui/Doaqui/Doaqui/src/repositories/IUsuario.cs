@@ -6,20 +6,20 @@ namespace Doaqui.src.repositories
 {
 
     /// <summary>
-    /// <para> Summary: Represets all CRUD actions related to users </para>
+    /// <para> Summary: Representação do CRUD relacionado a usuarios </para>
     /// <para> Created by: Nickole Bueno </para>
     /// <para> Version: 1.0 </para>
     /// <para> Date: 05/05/2022 </para>
     /// </summary>
     public interface IUsuario
     {
-        public void NewUser(NovoUsuarioDTO user);
-        public void UpdateUser(AtualizarUsuarioDTO user);
-        public void DeleteUser(int cnpj);
-        public UsuarioModel GetUserByCnpj(int cnpj);
-        public UsuarioModel GetUserByName(string name);
-        public UsuarioModel GetUserByAddress(string address);
-        public List<UsuarioModel> GetAllUsers();
+        public void NovoUsuario(NovoUsuarioDTO usuario);
+        public void AtualizarUsuario(AtualizarUsuarioDTO usuario);
+        public void DeletarUsuario(int cnpj);
+        public UsuarioModelo PegarUsuarioPeloCnpj(int cnpj);
+        public UsuarioModelo PegarUsuarioPeloNome(string nome);
+        public UsuarioModelo PegarUsuarioPeloContato(string contato);
+        public List<UsuarioModelo> PegarTodosUsuarios();
     }
 
 }

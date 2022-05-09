@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace Doaqui.src.models
 {
     [Table("tb_Usuario")]
-    public class UsuarioModel
+    public class UsuarioModelo
     {
 
         [Key]

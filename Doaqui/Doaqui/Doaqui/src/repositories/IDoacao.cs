@@ -6,19 +6,19 @@ namespace Doaqui.src.repositories
 {
 
     /// <summary>
-    /// <para> Summary: Represets all CRUD actions related to donations </para>
+    /// <para> Summary: Representação do CRUD relacionado a usuarios </para>
     /// <para> Created by: Nickole Bueno </para>
     /// <para> Version: 1.0 </para>
     /// <para> Date: 05/05/2022 </para>
     /// </summary>
     public interface IDoacao
     {
-        public void NewDonation(NovaDoacaoDTO donation);
-        public void UpdateDonation(AtualizarDoacaoDTO donation);
-        public void DeleteDonation(int id);
-        public DoacaoModel GetDonationById(int id);
-        public DoacaoModel GetDonationByCnpj(int cnpj);
-        public DoacaoModel GetDonationByContact(string contact);
-        public List<DoacaoModel> GetAllDonations();
+        public void NovaDoacao(NovaDoacaoDTO doacao);
+        public void AtulizarDoacao(AtualizarDoacaoDTO doacao);
+        public void DeletarDoacao(int id);
+        public DoacaoModelo PegarDoacaoPeloId(int id);
+        public DoacaoModelo PegarDoacaoPeloCnpj(int cnpj);
+        public DoacaoModelo PegarDoacaoPeloContato(string contato);
+        public List<DoacaoModelo> PegarTodasDoacoes();
     }
 }

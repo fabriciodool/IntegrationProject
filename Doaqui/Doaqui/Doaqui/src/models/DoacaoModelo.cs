@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace Doaqui.src.models
 {
     [Table("tb_Doacao")]
-    public class DoacaoModel
+    public class DoacaoModelo
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
