@@ -66,9 +66,9 @@ namespace Doaqui.src.repositories.implementations
             return _contexto.Usuarios.FirstOrDefault(u => u.CNPJ_ONG == cnpj);
         }
 
-        public UsuarioModelo PegarUsuariosPeloNome(string nome)
+        public List<UsuarioModelo> PegarUsuariosPeloNome(string nome)
         {
-            return _contexto.Usuarios.FirstOrDefault(u => u.Nome == nome);
+            return _contexto.Usuarios.Where(u => u.Nome == nome).ToList();
         }
 
         public UsuarioModelo PegarUsuarioPeloContato(string contato)
