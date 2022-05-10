@@ -34,33 +34,37 @@ namespace Doaqui.src.controllers
             
             return Ok(lista);
         }
-        [HttpGet("id/{idTema}")]
-        public IActionResult PegarDoacaoPeloCnpj([FromRoute] int CnpjDoacao)
+
+        [HttpGet("id/{cpnjDoacao}")]
+        public IActionResult PegarDoacaoPeloCnpj([FromRoute] int cnpjDoacao)
         {
-            var tema = _repositorio.PegarDoacaoPeloCnpj(CnpjDoacao);
+            var tema = _repositorio.PegarDoacaoPeloCnpj(cnpjDoacao);
 
             if (tema == null) return NotFound();
             
             return Ok(tema);
         }
-        [HttpGet]
-        public IActionResult PegarDoacaoPelaDescricaoDoacao([FromQuery] string descricao)
-        {
-              var doacoes = _repositorio.PegarDoacaoPelaDescricaoDoacao(descricao);
 
-            if (doacoes.Count < 1) return NoContent();
+        [HttpGet]
+        public IActionResult PegarDoacaoPeloContato([FromQuery] string contato)
+        {
+            var doacoes = _repositorio.PegarDoacaoPeloContato(contato);
+
+            if (doacoes == null) return NotFound();
             
             return Ok(doacoes);
         }
-         [HttpPost]
-        public IActionResult NovaDoacao([FromBody] NovaDoacaoDTO)
+
+        [HttpPost]
+        public IActionResult NovaDoacao([FromBody] NovaDoacaoDTO doacao)
         {
             if(!ModelState.IsValid) return BadRequest();
 
-            _repositorio.NovaDoacao(doacao)
-            
-            return Created($"api/Doacoes", doacao)
+            _repositorio.NovaDoacao(doacao);
+
+            return Created($"api/Doacoes", doacao);
         }
+
         [HttpPut]
         public IActionResult AtualizarDoacao([FromBody] AtualizarDoacaoDTO doacao)
         {
@@ -70,6 +74,7 @@ namespace Doaqui.src.controllers
             
             return Ok(doacao);
         }
+
         [HttpDelete("deletar/{idDoacao}")]
         public IActionResult DeletarDoacao([FromRoute] int idDoacao)
         {

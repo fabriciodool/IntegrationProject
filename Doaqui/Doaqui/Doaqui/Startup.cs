@@ -1,3 +1,5 @@
+using Doaqui.src.repositories;
+using Doaqui.src.repositories.implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +29,14 @@ namespace Doaqui
                 .Build();
                 
             services.AddDbContext<src.data.DoaquiContexto>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IUsuario, UsuarioRepositorio>();
+            services.AddScoped<ISolicitacao, SolicitacaoRepositorio>();
+            services.AddScoped<IDoacao, DoacaoRepositorio>();
+
             services.AddControllers();
+            services.AddCors();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Doaqui", Version = "v1" });
@@ -51,6 +60,12 @@ namespace Doaqui
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(c => c
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
 
             app.UseEndpoints(endpoints =>
             {

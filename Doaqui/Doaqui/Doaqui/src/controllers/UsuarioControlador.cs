@@ -20,21 +20,23 @@ namespace Doaqui.src.controllers
         }
         #endregion Construtores
 
-       #region Métodos
-       [HttpGet("id/{idUsuario}")]
+        #region Métodos
+        [HttpGet("id/{idUsuario}")]
         public IActionResult PegarUsuarioPeloCnpj([FromRoute] int idUsuario)
         {
             var usuario = _repositorio.PegarUsuarioPeloCnpj(idUsuario);
             if (usuario == null) return NotFound();
             return Ok(usuario);
         }
-         [HttpGet]
+
+        [HttpGet]
         public IActionResult PegarUsuariosPeloNome([FromQuery] string nomeUsuario)
         {
             var usuarios = _repositorio.PegarUsuariosPeloNome(nomeUsuario);
             if (usuarios.Count < 1) return NoContent();
             return Ok(usuarios);
         }
+
         [HttpGet("contato/{contatoUsuario}")]
         public IActionResult PegarUsuarioPeloContato([FromRoute] string contatoUsuario)
         {
@@ -42,6 +44,7 @@ namespace Doaqui.src.controllers
             if (usuario == null) return NotFound();
             return Ok(usuario);
         }
+
         [HttpPost]
         public IActionResult NovoUsuario([FromBody] NovoUsuarioDTO usuario)
         {
@@ -49,14 +52,16 @@ namespace Doaqui.src.controllers
             _repositorio.NovoUsuario(usuario);
             return Created($"api/Usuarios/{usuario.Email}", usuario);
         }
-         [HttpPut]
+
+        [HttpPut]
         public IActionResult AtualizarUsuario([FromBody] AtualizarUsuarioDTO usuario)
         {
             if (!ModelState.IsValid) return BadRequest();
             _repositorio.AtualizarUsuario(usuario);
             return Ok(usuario);
         }
-         [HttpDelete("deletar/{idUsuario}")]
+
+        [HttpDelete("deletar/{idUsuario}")]
         public IActionResult DeletarUsuario([FromRoute] int idUsuario)
         {
             _repositorio.DeletarUsuario(idUsuario);

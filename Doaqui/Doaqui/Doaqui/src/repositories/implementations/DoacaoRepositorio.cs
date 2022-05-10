@@ -43,7 +43,7 @@ namespace Doaqui.src.repositories.implementations
             _contexto.SaveChanges();
         }
 
-        public void AtulizarDoacao(AtualizarDoacaoDTO doacao)
+        public void AtualizarDoacao(AtualizarDoacaoDTO doacao)
         {
             DoacaoModelo modelo = new DoacaoModelo();
             modelo.Contato = doacao.Contato;

@@ -14,7 +14,7 @@ namespace Doaqui.src.repositories
     public interface IDoacao
     {
         public void NovaDoacao(NovaDoacaoDTO doacao);
-        public void AtulizarDoacao(AtualizarDoacaoDTO doacao);
+        public void AtualizarDoacao(AtualizarDoacaoDTO doacao);
         public void DeletarDoacao(int id);
         public DoacaoModelo PegarDoacaoPeloId(int id);
         public DoacaoModelo PegarDoacaoPeloCnpj(int cnpj);
