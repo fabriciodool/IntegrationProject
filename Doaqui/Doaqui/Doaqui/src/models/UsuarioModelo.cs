@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
+using Doaqui.src.utilidades;
 
 namespace Doaqui.src.models
 {
@@ -11,6 +12,9 @@ namespace Doaqui.src.models
 
         [Key]
         public int CNPJ_ONG { get; set; }
+
+        [Required]
+        public TipoUsuario Tipo { get; set; }
 
         [Required, StringLength(50)]
         public string Nome { get; set; }

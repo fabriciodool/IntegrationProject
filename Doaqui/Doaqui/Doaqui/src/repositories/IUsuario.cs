@@ -18,9 +18,8 @@ namespace Doaqui.src.repositories
         public void DeletarUsuario(int cnpj);
         public UsuarioModelo PegarUsuarioPeloCnpj(int cnpj);
         List <UsuarioModelo> PegarUsuariosPeloNome(string nome);
-        public UsuarioModelo PegarUsuarioPeloContato(string contato);
+        public UsuarioModelo PegarUsuarioPeloEmail(string email);
         public List<UsuarioModelo> PegarTodosUsuarios();
     }
 
 }
-
