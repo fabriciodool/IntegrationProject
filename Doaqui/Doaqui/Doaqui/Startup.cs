@@ -1,3 +1,5 @@
+using System.Security;
+using System.Text;
 using Doaqui.src.repositories;
 using Doaqui.src.repositories.implementations;
 using Microsoft.AspNetCore.Builder;
@@ -27,15 +29,41 @@ namespace Doaqui
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                 .AddJsonFile("appsettings.json")
                 .Build();
-                
+
+            // Contexto
             services.AddDbContext<src.data.DoaquiContexto>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
+            // Repositorios
             services.AddScoped<IUsuario, UsuarioRepositorio>();
             services.AddScoped<ISolicitacao, SolicitacaoRepositorio>();
             services.AddScoped<IDoacao, DoacaoRepositorio>();
 
+            // Servicos
+            services.AddScoped<IUsuarioServicos, UsuarioServicos>();
+
+            // Controladores
             services.AddControllers();
             services.AddCors();
+
+            // Autentificacao
+            var key = Encoding.ASCII.GetBytes(SecureStringMarshal.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+                {
+                    x.RequireHttpsMetadata = false;
+                    x.SaveToken = true;
+                    x.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -66,6 +94,9 @@ namespace Doaqui
                 .AllowAnyMethod()
                 .AllowAnyHeader()
             );
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
