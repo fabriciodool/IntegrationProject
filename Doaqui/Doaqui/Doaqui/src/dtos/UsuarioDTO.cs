@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Doaqui.src.utilidades;
 
 namespace Doaqui.src.dtos
 {
@@ -9,9 +10,9 @@ namespace Doaqui.src.dtos
     /// <para>Data: 29/04/2022</para>
     /// </summary>
     public class NovoUsuarioDTO
-    {   
+    {
         [Required]
-        public int  CNPJ_ONG { get; set; }
+        public int CNPJ_ONG { get; set; }
 
         [Required, StringLength(50)]
         public string Nome { get; set; }
@@ -28,14 +29,15 @@ namespace Doaqui.src.dtos
         [Required, StringLength(20)]
         public string Senha { get; set; }
 
-        public NovoUsuarioDTO(int cnpj, string nome, string email, string telefone, string endereco, string senha)
-        {   
-            CNPJ_ONG = cnpj;
+        [Required]
+        public TipoUsuario Tipo { get; set; }
+
+        public NovoUsuarioDTO(string nome, string email, string senha, string foto, TipoUsuario tipo)
+        {
             Nome = nome;
             Email = email;
-            Telefone = telefone;
-            Endereco = endereco;
             Senha = senha;
+            Tipo = tipo;
         }
     }
 
@@ -60,14 +62,20 @@ namespace Doaqui.src.dtos
         public string Endereco { get; set; }
 
         [Required, StringLength(30)]
+        public string Email { get; set; }
+
+        [Required, StringLength(30)]
         public string Senha { get; set; }
 
-        public AtualizarUsuarioDTO(string nome, string telefone, string endereco, string senha)
-        {   
+        public AtualizarUsuarioDTO(string nome, string email, string telefone, string endereco, string senha)
+        {
             Nome = nome;
             Telefone = telefone;
             Endereco = endereco;
+            Email = email;
             Senha = senha;
         }
+
+        
     }
 }

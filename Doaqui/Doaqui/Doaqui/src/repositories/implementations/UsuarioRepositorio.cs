@@ -39,7 +39,9 @@ namespace Doaqui.src.repositories.implementations
                 Email = usuario.Email,
                 Telefone = usuario.Telefone,
                 Endereco = usuario.Endereco,
-                Senha = usuario.Senha
+                Senha = usuario.Senha,
+                Tipo = usuario.Tipo
+
             });
             _contexto.SaveChanges();
         }
@@ -71,9 +73,9 @@ namespace Doaqui.src.repositories.implementations
             return _contexto.Usuarios.Where(u => u.Nome == nome).ToList();
         }
 
-        public UsuarioModelo PegarUsuarioPeloContato(string contato)
+        public UsuarioModelo PegarUsuarioPeloEmail(string email)
         {
-            return _contexto.Usuarios.FirstOrDefault(u => u.Endereco == contato);
+            return _contexto.Usuarios.FirstOrDefault(u => u.Email == email);
         }
 
         public List<UsuarioModelo> PegarTodosUsuarios()

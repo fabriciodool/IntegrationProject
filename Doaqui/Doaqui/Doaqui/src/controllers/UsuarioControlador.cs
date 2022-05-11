@@ -38,9 +38,9 @@ namespace Doaqui.src.controllers
         }
 
         [HttpGet("contato/{contatoUsuario}")]
-        public IActionResult PegarUsuarioPeloContato([FromRoute] string contatoUsuario)
+        public IActionResult PegarUsuarioPeloEmail([FromRoute] string contatoUsuario)
         {
-            var usuario = _repositorio.PegarUsuarioPeloContato(contatoUsuario);
+            var usuario = _repositorio.PegarUsuarioPeloEmail(contatoUsuario);
             if (usuario == null) return NotFound();
             return Ok(usuario);
         }
