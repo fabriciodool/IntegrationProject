@@ -6,6 +6,8 @@ using Doaqui.src.dtos;
 using Doaqui.src.models;
 using System.Collections.Generic;
 using Doaqui.src.utilidades;
+using Doaqui.src.repositories;
+using System.Threading.Tasks;
 
 namespace DoaquiTeste.Test.repositories
 {
@@ -14,10 +16,10 @@ namespace DoaquiTeste.Test.repositories
     {
 
         private DoaquiContexto _contexto;
-        private UsuarioRepositorio _repositorio;
+        private IUsuario _repositorio;
 
         [TestMethod]
-        public void CriarUmUsuarioRetornaUmUsuario()
+        public async Task CriarUmUsuarioRetornaUmUsuarioAsync()
         {
             var opt = new DbContextOptionsBuilder<DoaquiContexto>()
             .UseInMemoryDatabase(databaseName: "db_doaqui")
@@ -26,13 +28,12 @@ namespace DoaquiTeste.Test.repositories
             _contexto = new DoaquiContexto(opt);
             _repositorio = new UsuarioRepositorio(_contexto);
 
-            _repositorio.NovoUsuario(
-                new NovoUsuarioDTO("TesteUsuario", "testeemail@email.com",
-                "senhateste", "pictureLink", TipoUsuario.ONG));
+            await _repositorio.NovoUsuarioAsync(
+                new NovoUsuarioDTO(445482400, "TesteUsuario", "testeemail@email.com",
+                "40028922","av. pitangas 123", "senhateste", TipoUsuario.ONG));
 
             List<UsuarioModelo> usuarioModelos = _repositorio.PegarTodosUsuarios();
             Assert.AreEqual(1, usuarioModelos.Count);
         }
-
     }
 }
