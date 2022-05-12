@@ -11,7 +11,7 @@ namespace Doaqui.src.dtos
     /// </summary>
     public class NovoUsuarioDTO
     {
-        [Required]
+        [Key]
         public int CNPJ_ONG { get; set; }
 
         [Required, StringLength(50)]
@@ -32,10 +32,13 @@ namespace Doaqui.src.dtos
         [Required]
         public TipoUsuario Tipo { get; set; }
 
-        public NovoUsuarioDTO(string nome, string email, string senha, string foto, TipoUsuario tipo)
+        public NovoUsuarioDTO(int cnpj_ong, string nome, string email, string telefone, string endereco, string senha, TipoUsuario tipo)
         {
+            CNPJ_ONG = cnpj_ong;
             Nome = nome;
             Email = email;
+            Telefone = telefone;
+            Endereco = endereco;
             Senha = senha;
             Tipo = tipo;
         }
