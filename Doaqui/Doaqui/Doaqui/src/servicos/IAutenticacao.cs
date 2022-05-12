@@ -1,13 +1,15 @@
 using Doaqui.src.dtos;
 using Doaqui.src.models;
+using System.Threading.Tasks;
+
 namespace Doaqui.src.servicos
 
 {
     public interface IAutenticacao
     {
         string CodificarSenha(string senha);
-        void CriarUsuarioSemDuplicar(NovoUsuarioDTO usuario);
+        Task CriarUsuarioSemDuplicarAsync(NovoUsuarioDTO usuario);
         string GerarToken(UsuarioModelo usuario);
-        AutorizacaoDTO PegarAutorizacao(AutenticarDTO autenticacao);
+        Task <AutorizacaoDTO> PegarAutorizacaoAsync(AutenticarDTO autenticacao);
     }
 }

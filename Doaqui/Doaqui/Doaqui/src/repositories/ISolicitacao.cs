@@ -1,6 +1,7 @@
 using Doaqui.src.dtos;
 using Doaqui.src.models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Doaqui.src.repositories
 {
@@ -13,11 +14,11 @@ namespace Doaqui.src.repositories
     /// </summary>
     public interface ISolicitacao
     {
-        public void NovaSolicitacao(NovaSolicitacaoDTO solicitacao);
-        public void AtualizarSolicitacao(AtualizarSolicitacaoDTO solicitacao);
-        public void DeletarSolicitacao(int id);
-        public SolicitacaoModelo PegarSolicitacaoPeloId(int id);
-        public List<SolicitacaoModelo> PegarTodasSolicitacoes();
+        List<SolicitacaoModelo> PegarTodasSolicitacoes();
+        Task <SolicitacaoModelo> PegarSolicitacaoPeloIdAsync(int id);
+        Task NovaSolicitacaoAsync(NovaSolicitacaoDTO solicitacao);
+        Task AtualizarSolicitacaoAsync(AtualizarSolicitacaoDTO solicitacao);
+        Task DeletarSolicitacaoAsync(int id);
     }
 
 }
