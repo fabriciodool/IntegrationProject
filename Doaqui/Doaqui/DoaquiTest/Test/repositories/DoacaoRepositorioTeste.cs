@@ -18,7 +18,7 @@ namespace DoaquiTeste.Test.repositories
         private DoacaoRepositorio _repositorio;
 
         [TestMethod]
-        public void CriarUmaDoacaoRetornaUmaDoacao()
+        public async void CriarUmaDoacaoRetornaUmaDoacao()
         {
             var opt = new DbContextOptionsBuilder<DoaquiContexto>()
             .UseInMemoryDatabase(databaseName: "db_doaqui")
@@ -27,9 +27,9 @@ namespace DoaquiTeste.Test.repositories
             _contexto = new DoaquiContexto(opt);
             _repositorio = new DoacaoRepositorio(_contexto);
 
-            _repositorio.NovaDoacao(new NovaDoacaoDTO("11912345678", 2, "12/12/2022", "DescricaoTeste", 1234567891));
+           await _repositorio.NovaDoacaoAsync(new NovaDoacaoDTO("11912345678", 2, "12/12/2022", "DescricaoTeste", 1234567891));
 
-            List<DoacaoModelo> doacaoModelos = _repositorio.PegarTodasDoacoes();
+            List<DoacaoModelo> doacaoModelos = await _repositorio.PegarTodasDoacoesAsync();
             Assert.AreEqual(1, doacaoModelos.Count);
         }
 

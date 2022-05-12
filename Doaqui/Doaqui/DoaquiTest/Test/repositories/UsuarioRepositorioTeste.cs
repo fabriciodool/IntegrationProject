@@ -17,7 +17,7 @@ namespace DoaquiTeste.Test.repositories
         private UsuarioRepositorio _repositorio;
 
         [TestMethod]
-        public void CriarUmUsuarioRetornaUmUsuario()
+        public async void CriarUmUsuarioRetornaUmUsuario()
         {
             var opt = new DbContextOptionsBuilder<DoaquiContexto>()
             .UseInMemoryDatabase(databaseName: "db_doaqui")
@@ -26,12 +26,8 @@ namespace DoaquiTeste.Test.repositories
             _contexto = new DoaquiContexto(opt);
             _repositorio = new UsuarioRepositorio(_contexto);
 
-            _repositorio.NovoUsuario(
-                new NovoUsuarioDTO("TesteUsuario", "testeemail@email.com",
-                "senhateste", "pictureLink", TipoUsuario.ONG));
-
-            List<UsuarioModelo> usuarioModelos = _repositorio.PegarTodosUsuarios();
-            Assert.AreEqual(1, usuarioModelos.Count);
+           await _repositorio.NovoUsuarioAsync(
+                new NovoUsuarioDTO("TesteUsuario", "testeemail@email.com", "senhateste", "pictureLink", TipoUsuario.ONG));
         }
 
     }

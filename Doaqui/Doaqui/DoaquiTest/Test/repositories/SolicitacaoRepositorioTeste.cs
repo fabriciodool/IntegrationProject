@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Doaqui.src.dtos;
 using Doaqui.src.models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DoaquiTeste.Test.repositories
 {
@@ -16,7 +17,7 @@ namespace DoaquiTeste.Test.repositories
         private SolicitacaoRepositorio _repositorio;
 
         [TestMethod]
-        public void CriarUmaSolicitacaoRetornaUmaSolicitacao()
+        public async Task CriarUmaSolicitacaoRetornaUmaSolicitacaoAsync()
         {
             var opt = new DbContextOptionsBuilder<DoaquiContexto>()
             .UseInMemoryDatabase(databaseName: "db_doaqui")
@@ -25,10 +26,10 @@ namespace DoaquiTeste.Test.repositories
             _contexto = new DoaquiContexto(opt);
             _repositorio = new SolicitacaoRepositorio(_contexto);
 
-            _repositorio.NovaSolicitacao(
+           await _repositorio.NovaSolicitacaoAsync(
                 new NovaSolicitacaoDTO(new UsuarioModelo(), new DoacaoModelo()));
 
-            List<SolicitacaoModelo> solicitacaoModelos = _repositorio.PegarTodasSolicitacoes();
+            List<SolicitacaoModelo> solicitacaoModelos = await _repositorio.PegarTodasSolicitacoesAsync();
             Assert.AreEqual(1, solicitacaoModelos.Count);
         }
 
