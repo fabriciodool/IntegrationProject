@@ -6,6 +6,8 @@ using Doaqui.src.dtos;
 using System.Linq;
 using System.Collections.Generic;
 using Doaqui.src.models;
+using System.Threading.Tasks;
+using Doaqui.src.repositories;
 
 namespace DoaquiTeste.Test.repositories
 {
@@ -15,10 +17,10 @@ namespace DoaquiTeste.Test.repositories
     {
 
         private DoaquiContexto _contexto;
-        private DoacaoRepositorio _repositorio;
+        private IDoacao _repositorio;
 
         [TestMethod]
-        public async void CriarUmaDoacaoRetornaUmaDoacao()
+        async Task CriarUmaDoacaoRetornaUmaDoacao()
         {
             var opt = new DbContextOptionsBuilder<DoaquiContexto>()
             .UseInMemoryDatabase(databaseName: "db_doaqui")
@@ -28,12 +30,8 @@ namespace DoaquiTeste.Test.repositories
             _repositorio = new DoacaoRepositorio(_contexto);
 
            await _repositorio.NovaDoacaoAsync(new NovaDoacaoDTO("11912345678", 2, "12/12/2022", "DescricaoTeste", 1234567891));
-
             List<DoacaoModelo> doacaoModelos = await _repositorio.PegarTodasDoacoesAsync();
             Assert.AreEqual(1, doacaoModelos.Count);
         }
-
     }
-
-
 }

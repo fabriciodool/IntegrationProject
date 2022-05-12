@@ -13,9 +13,6 @@ namespace Doaqui.src.models
         [Key]
         public int CNPJ_ONG { get; set; }
 
-        [Required]
-        public TipoUsuario Tipo { get; set; }
-
         [Required, StringLength(50)]
         public string Nome { get; set; }
 
@@ -29,6 +26,9 @@ namespace Doaqui.src.models
         public string Endereco { get; set; }
 
         [Required, StringLength(20)]
-        public string Senha { get; set; }  
+        public string Senha { get; set; }
+
+        [Required]
+        public TipoUsuario Tipo { get; set; }
     }
 }
