@@ -35,15 +35,15 @@ namespace Doaqui.src.dtos
     /// </summary>
     public class AtualizarSolicitacaoDTO
     {
-        public AtualizarSolicitacaoDTO(int id, UsuarioModelo ong, DoacaoModelo doacao)
+        public AtualizarSolicitacaoDTO(int cnpj, UsuarioModelo ong, DoacaoModelo doacao)
         {
-            Id = id;
+            Cnpj = cnpj;
             ONG = ong;
             Doacao = doacao;
         }
 
         [Required]
-        public int Id { get; set; }
+        public int Cnpj { get; set; }
 
         [Required]
         public UsuarioModelo ONG { get; set; }

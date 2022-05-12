@@ -14,8 +14,8 @@ namespace Doaqui.src.repositories
     /// </summary>
     public interface ISolicitacao
     {
-        List<SolicitacaoModelo> PegarTodasSolicitacoes();
-        Task <SolicitacaoModelo> PegarSolicitacaoPeloIdAsync(int id);
+        Task<List<SolicitacaoModelo>> PegarTodasSolicitacoesAsync();
+        Task <SolicitacaoModelo> PegarSolicitacaoPeloCnpjAsync(int cnpj);
         Task NovaSolicitacaoAsync(NovaSolicitacaoDTO solicitacao);
         Task AtualizarSolicitacaoAsync(AtualizarSolicitacaoDTO solicitacao);
         Task DeletarSolicitacaoAsync(int id);

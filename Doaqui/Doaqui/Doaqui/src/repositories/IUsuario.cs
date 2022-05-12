@@ -14,7 +14,6 @@ namespace Doaqui.src.repositories
     /// </summary>
     public interface IUsuario
     {
-        List<UsuarioModelo> PegarTodosUsuarios();
         Task <UsuarioModelo> PegarUsuarioPeloCnpjAsync(int cnpj);
         Task <List <UsuarioModelo>> PegarUsuariosPeloNomeAsync(string nome);
         Task <UsuarioModelo> PegarUsuarioPeloEmailAsync(string email);

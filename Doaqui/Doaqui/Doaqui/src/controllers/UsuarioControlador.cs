@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Doaqui.src.dtos;
 using Doaqui.src.repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -22,49 +23,49 @@ namespace Doaqui.src.controllers
 
         #region Métodos
         [HttpGet("id/{idUsuario}")]
-        public IActionResult PegarUsuarioPeloCnpj([FromRoute] int idUsuario)
+        public async Task<ActionResult> PegarUsuarioPeloCnpjAsync([FromRoute] int idUsuario)
         {
-            var usuario = _repositorio.PegarUsuarioPeloCnpj(idUsuario);
+            var usuario = await _repositorio.PegarUsuarioPeloCnpjAsync(idUsuario);
             if (usuario == null) return NotFound();
             return Ok(usuario);
         }
 
         [HttpGet]
-        public IActionResult PegarUsuariosPeloNome([FromQuery] string nomeUsuario)
+        public async Task<ActionResult> PegarUsuariosPeloNomeAsync([FromQuery] string nomeUsuario)
         {
-            var usuarios = _repositorio.PegarUsuariosPeloNome(nomeUsuario);
+            var usuarios = await _repositorio.PegarUsuariosPeloNomeAsync(nomeUsuario);
             if (usuarios.Count < 1) return NoContent();
             return Ok(usuarios);
         }
 
         [HttpGet("contato/{contatoUsuario}")]
-        public IActionResult PegarUsuarioPeloEmail([FromRoute] string contatoUsuario)
+        public async Task<ActionResult> PegarUsuarioPeloEmailAsync([FromRoute] string contatoUsuario)
         {
-            var usuario = _repositorio.PegarUsuarioPeloEmail(contatoUsuario);
+            var usuario = await _repositorio.PegarUsuarioPeloEmailAsync(contatoUsuario);
             if (usuario == null) return NotFound();
             return Ok(usuario);
         }
 
         [HttpPost]
-        public IActionResult NovoUsuario([FromBody] NovoUsuarioDTO usuario)
+        public async Task<ActionResult> NovoUsuarioAsync([FromBody] NovoUsuarioDTO usuario)
         {
             if (!ModelState.IsValid) return BadRequest();
-            _repositorio.NovoUsuario(usuario);
+           await _repositorio.NovoUsuarioAsync(usuario);
             return Created($"api/Usuarios/{usuario.Email}", usuario);
         }
 
         [HttpPut]
-        public IActionResult AtualizarUsuario([FromBody] AtualizarUsuarioDTO usuario)
+        public async Task<ActionResult> AtualizarUsuarioAsync([FromBody] AtualizarUsuarioDTO usuario)
         {
             if (!ModelState.IsValid) return BadRequest();
-            _repositorio.AtualizarUsuario(usuario);
+           await _repositorio.AtualizarUsuarioAsync(usuario);
             return Ok(usuario);
         }
 
         [HttpDelete("deletar/{idUsuario}")]
-        public IActionResult DeletarUsuario([FromRoute] int idUsuario)
+        public async Task<ActionResult> DeletarUsuarioAsync([FromRoute] int idUsuario)
         {
-            _repositorio.DeletarUsuario(idUsuario);
+           await _repositorio.DeletarUsuarioAsync(idUsuario);
             return NoContent();
         }
         #endregion Métodos

@@ -14,7 +14,7 @@ namespace Doaqui.src.repositories
     /// </summary>
     public interface IDoacao
     {
-        List<DoacaoModelo> PegarTodasDoacoes();
+        Task<List<DoacaoModelo>> PegarTodasDoacoesAsync();
         Task <DoacaoModelo> PegarDoacaoPeloIdAsync(int id);
         Task <DoacaoModelo> PegarDoacaoPeloCnpjAsync(int cnpj);
         Task <DoacaoModelo> PegarDoacaoPeloContatoAsync(string contato);

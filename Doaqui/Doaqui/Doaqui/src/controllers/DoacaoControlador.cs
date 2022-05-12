@@ -1,6 +1,7 @@
 using Doaqui.src.dtos;
 using Microsoft.AspNetCore.Mvc;
 using Doaqui.src.repositories;
+using System.Threading.Tasks;
 
 namespace Doaqui.src.controllers
 {
@@ -27,18 +28,18 @@ namespace Doaqui.src.controllers
         #region Metodos
 
         [HttpGet]
-        public IActionResult PegarTodasDoacoes()
+        public async Task<ActionResult> PegarTodasDoacoesAsync()
         {
-            var lista = _repositorio.PegarTodasDoacoes();
+            var lista = await _repositorio.PegarTodasDoacoesAsync();
             if (lista.Count < 1) return NoContent();
             
             return Ok(lista);
         }
 
         [HttpGet("id/{cpnjDoacao}")]
-        public IActionResult PegarDoacaoPeloCnpj([FromRoute] int cnpjDoacao)
+        public async Task<ActionResult> PegarDoacaoPeloCnpjAsync([FromRoute] int cnpjDoacao)
         {
-            var tema = _repositorio.PegarDoacaoPeloCnpj(cnpjDoacao);
+            var tema = await _repositorio.PegarDoacaoPeloCnpjAsync(cnpjDoacao);
 
             if (tema == null) return NotFound();
             
@@ -46,9 +47,9 @@ namespace Doaqui.src.controllers
         }
 
         [HttpGet]
-        public IActionResult PegarDoacaoPeloContato([FromQuery] string contato)
+        public async Task<ActionResult> PegarDoacaoPeloContato([FromQuery] string contato)
         {
-            var doacoes = _repositorio.PegarDoacaoPeloContato(contato);
+            var doacoes = await _repositorio.PegarDoacaoPeloContatoAsync(contato);
 
             if (doacoes == null) return NotFound();
             
@@ -56,29 +57,29 @@ namespace Doaqui.src.controllers
         }
 
         [HttpPost]
-        public IActionResult NovaDoacao([FromBody] NovaDoacaoDTO doacao)
+        public async Task<ActionResult> NovaDoacaoAsync([FromBody] NovaDoacaoDTO doacao)
         {
             if(!ModelState.IsValid) return BadRequest();
 
-            _repositorio.NovaDoacao(doacao);
+           await _repositorio.NovaDoacaoAsync(doacao);
 
             return Created($"api/Doacoes", doacao);
         }
 
         [HttpPut]
-        public IActionResult AtualizarDoacao([FromBody] AtualizarDoacaoDTO doacao)
+        public async Task<ActionResult> AtualizarDoacaoAsync([FromBody] AtualizarDoacaoDTO doacao)
         {
             if(!ModelState.IsValid) return BadRequest();
 
-            _repositorio.AtualizarDoacao(doacao);
+          await _repositorio.AtualizarDoacaoAsync(doacao);
             
             return Ok(doacao);
         }
 
         [HttpDelete("deletar/{idDoacao}")]
-        public IActionResult DeletarDoacao([FromRoute] int idDoacao)
+        public async Task<ActionResult> DeletarDoacaoAsync([FromRoute] int idDoacao)
         {
-            _repositorio.DeletarDoacao(idDoacao);
+           await _repositorio.DeletarDoacaoAsync(idDoacao);
             return NoContent();
         }
 

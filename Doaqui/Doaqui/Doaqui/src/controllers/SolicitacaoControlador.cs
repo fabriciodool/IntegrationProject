@@ -1,4 +1,5 @@
-﻿using Doaqui.src.dtos;
+﻿using System.Threading.Tasks;
+using Doaqui.src.dtos;
 using Doaqui.src.repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,10 +27,10 @@ namespace Doaqui.src.controllers
 
         #region Metodos
 
-        [HttpGet("id/{idsolicitacao")]
-        public IActionResult PegarSolicitacaoPeloId([FromRoute] int idSolicitacao)
+        [HttpGet("cnpj/{idsolicitacao")]
+        public async Task<ActionResult> PegarSolicitacaoPeloCnpjAsync([FromRoute] int cnpjSolicitacao)
         {
-            var solicitacao = _repositorio.PegarSolicitacaoPeloId(idSolicitacao);
+            var solicitacao = await _repositorio.PegarSolicitacaoPeloCnpjAsync(cnpjSolicitacao);
 
             if (solicitacao == null) return NotFound();
 
@@ -37,9 +38,9 @@ namespace Doaqui.src.controllers
         }
 
         [HttpGet]
-        public IActionResult PegarTodasSolicitacoes()
+        public async Task<ActionResult> PegarTodasSolicitacoesAsync()
         {
-            var lista = _repositorio.PegarTodasSolicitacoes();
+            var lista = await _repositorio.PegarTodasSolicitacoesAsync();
 
             if (lista.Count < 1) return NoContent();
 
@@ -47,30 +48,30 @@ namespace Doaqui.src.controllers
         }
 
         [HttpPost]
-        public IActionResult NovaSolicitacao(NovaSolicitacaoDTO solicitacao)
+        public async Task<ActionResult> NovaSolicitacaoAsync(NovaSolicitacaoDTO solicitacao)
         {
             if (ModelState.IsValid) return BadRequest();
 
-            _repositorio.NovaSolicitacao(solicitacao);
+           await _repositorio.NovaSolicitacaoAsync(solicitacao);
 
             return Created($"api/Solicitacao", solicitacao);
 
         }
 
         [HttpPut]
-        public IActionResult AtualizarSolicitacao([FromBody] AtualizarSolicitacaoDTO solicitacao)
+        public async Task<ActionResult> AtualizarSolicitacaoAsync([FromBody] AtualizarSolicitacaoDTO solicitacao)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            _repositorio.AtualizarSolicitacao(solicitacao);
+           await _repositorio.AtualizarSolicitacaoAsync(solicitacao);
 
             return Ok(solicitacao);
         }
 
         [HttpDelete]
-        public IActionResult DeletarSolicitacao([FromRoute] int idSolicitacao)
+        public async Task<ActionResult> DeletarSolicitacaoAsync([FromRoute] int cnpjSolicitacao)
         {
-            _repositorio.DeletarSolicitacao(idSolicitacao);
+           await _repositorio.DeletarSolicitacaoAsync(cnpjSolicitacao);
             return NoContent();
         }
 
