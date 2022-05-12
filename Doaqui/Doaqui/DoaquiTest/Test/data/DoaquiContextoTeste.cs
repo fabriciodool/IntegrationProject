@@ -40,7 +40,6 @@ namespace DoaquiTest.Test.data
         public void InsertNewRequestReturnsRequest()
         {
             SolicitacaoModelo model = new SolicitacaoModelo();
-            model.Id = 0;
             model.ONG = null;
             model.Doacao = null;
             _context.Solicitacoes.Add(model);
