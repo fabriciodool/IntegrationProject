@@ -10,6 +10,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Doaqui.src.servicos.implementacoes;
+using Doaqui.src.servicos;
 
 namespace Doaqui
 {
@@ -39,14 +43,14 @@ namespace Doaqui
             services.AddScoped<IDoacao, DoacaoRepositorio>();
 
             // Servicos
-            services.AddScoped<IUsuarioServicos, UsuarioServicos>();
+             services.AddScoped<IAutenticacao, AutenticacaoServicos>();
 
             // Controladores
             services.AddControllers();
             services.AddCors();
 
             // Autentificacao
-            var key = Encoding.ASCII.GetBytes(SecureStringMarshal.Secret);
+            var key = Encoding.ASCII.GetBytes(Configuration["Settings:Secret"]);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

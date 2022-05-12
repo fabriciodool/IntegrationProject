@@ -1,11 +1,11 @@
 using System;
 using System.Threading.Tasks;
-using BlogPessoal.src.dtos;
-using BlogPessoal.src.services;
+using Doaqui.src.dtos;
+using Doaqui.src.servicos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlogPessoal.src.controladores
+namespace Doaqui.src.controladores
 {
     [ApiController]
     [Route("api/Autenticacao")]
@@ -33,13 +33,13 @@ namespace BlogPessoal.src.controladores
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<ActionResult> Autenticar([FromBody] AutenticarDTO autenticacao)
+        public ActionResult Autenticar([FromBody] AutenticarDTO autenticacao)
         {
             if (!ModelState.IsValid) return BadRequest();
 
             try
             {
-                var autorizacao = await _servicos.PegarAutorizacaoAsync(autenticacao);
+                var autorizacao = _servicos.PegarAutorizacao(autenticacao);
                 return Ok(autorizacao);
             }
             catch (Exception ex)
