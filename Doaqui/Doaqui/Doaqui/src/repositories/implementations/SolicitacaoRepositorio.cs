@@ -1,8 +1,10 @@
 ﻿using Doaqui.src.data;
 using Doaqui.src.dtos;
 using Doaqui.src.models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Doaqui.src.repositories.implementations
 {
@@ -30,39 +32,39 @@ namespace Doaqui.src.repositories.implementations
 
 
         #region Methods
-        public void NovaSolicitacao(NovaSolicitacaoDTO solicitacao)
+        public async Task NovaSolicitacaoAsync(NovaSolicitacaoDTO solicitacao)
         {
             _contexto.Solicitacoes.Add(new SolicitacaoModelo
             {
                 ONG = solicitacao.ONG,
                 Doacao = solicitacao.Doacao,
             });
-            _contexto.SaveChanges();
+          await _contexto.SaveChangesAsync();
         }
 
-        public void AtualizarSolicitacao(AtualizarSolicitacaoDTO solicitacao)
+        public async Task AtualizarSolicitacaoAsync(AtualizarSolicitacaoDTO solicitacao)
         {
-            SolicitacaoModelo modelo = PegarSolicitacaoPeloId(solicitacao.Id);
+            SolicitacaoModelo modelo = await PegarSolicitacaoPeloCnpjAsync(solicitacao.Cnpj);
             modelo.ONG = solicitacao.ONG;
             modelo.Doacao = solicitacao.Doacao;
             _contexto.Update(modelo);
-            _contexto.SaveChanges();
+           await _contexto.SaveChangesAsync();
         }
 
-        public void DeletarSolicitacao(int id)
+        public async Task DeletarSolicitacaoAsync(int Cnpj)
         {
-            _contexto.Solicitacoes.Remove(PegarSolicitacaoPeloId(id));
-            _contexto.SaveChanges();
+            _contexto.Solicitacoes.Remove(await PegarSolicitacaoPeloCnpjAsync(Cnpj));
+          await _contexto.SaveChangesAsync();
         }
 
-        public SolicitacaoModelo PegarSolicitacaoPeloId(int id)
+        public async Task<SolicitacaoModelo> PegarSolicitacaoPeloCnpjAsync(int id)
         {
-            return _contexto.Solicitacoes.FirstOrDefault(r => r.Id == id);
+            return await _contexto.Solicitacoes.FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public List<SolicitacaoModelo> PegarTodasSolicitacoes()
+        public async Task<List<SolicitacaoModelo>> PegarTodasSolicitacoesAsync()
         {
-            return _contexto.Solicitacoes.ToList();
+            return await _contexto.Solicitacoes.ToListAsync();
         }
         #endregion
 

@@ -1,8 +1,10 @@
 ﻿using Doaqui.src.data;
 using Doaqui.src.dtos;
 using Doaqui.src.models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Doaqui.src.repositories.implementations
 {
@@ -30,7 +32,7 @@ namespace Doaqui.src.repositories.implementations
 
 
         #region Methods
-        public void NovoUsuario(NovoUsuarioDTO usuario)
+        public async Task NovoUsuarioAsync(NovoUsuarioDTO usuario)
         {
             _contexto.Usuarios.Add(new UsuarioModelo
             {
@@ -43,44 +45,41 @@ namespace Doaqui.src.repositories.implementations
                 Tipo = usuario.Tipo
 
             });
-            _contexto.SaveChanges();
+           await _contexto.SaveChangesAsync();
         }
 
-        public void AtualizarUsuario(AtualizarUsuarioDTO usuario)
+        public async Task AtualizarUsuarioAsync(AtualizarUsuarioDTO usuario)
         {
-            UsuarioModelo modelo = PegarUsuarioPeloCnpj(usuario.CNPJ_ONG);
+            UsuarioModelo modelo = await PegarUsuarioPeloCnpjAsync(usuario.CNPJ_ONG);
             modelo.Nome = usuario.Nome;
             modelo.Telefone = usuario.Telefone;
             modelo.Endereco = usuario.Endereco;
             modelo.Senha = usuario.Senha;
             _contexto.Update(modelo);
-            _contexto.SaveChanges();
+           await _contexto.SaveChangesAsync();
         }
 
-        public void DeletarUsuario(int cnpj)
+        public async Task DeletarUsuarioAsync(int cnpj)
         {
-            _contexto.Usuarios.Remove(PegarUsuarioPeloCnpj(cnpj));
-            _contexto.SaveChanges();
+            _contexto.Usuarios.Remove(await PegarUsuarioPeloCnpjAsync(cnpj));
+           await _contexto.SaveChangesAsync();
         }
 
-        public UsuarioModelo PegarUsuarioPeloCnpj(int cnpj)
+        public async Task<UsuarioModelo> PegarUsuarioPeloCnpjAsync(int cnpj)
         {
-            return _contexto.Usuarios.FirstOrDefault(u => u.CNPJ_ONG == cnpj);
+            return await _contexto.Usuarios.FirstOrDefaultAsync(u => u.CNPJ_ONG == cnpj);
         }
 
-        public List<UsuarioModelo> PegarUsuariosPeloNome(string nome)
+        public async Task<List<UsuarioModelo>> PegarUsuariosPeloNomeAsync(string nome)
         {
-            return _contexto.Usuarios.Where(u => u.Nome == nome).ToList();
+            return await _contexto.Usuarios
+            .Where(u => u.Nome == nome)
+            .ToListAsync();
         }
 
-        public UsuarioModelo PegarUsuarioPeloEmail(string email)
+        public async Task<UsuarioModelo> PegarUsuarioPeloEmailAsync(string email)
         {
-            return _contexto.Usuarios.FirstOrDefault(u => u.Email == email);
-        }
-
-        public List<UsuarioModelo> PegarTodosUsuarios()
-        {
-            return _contexto.Usuarios.ToList();
+            return await _contexto.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
         }
         #endregion
     }

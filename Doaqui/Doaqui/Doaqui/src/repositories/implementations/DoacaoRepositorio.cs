@@ -1,8 +1,10 @@
 ﻿using Doaqui.src.data;
 using Doaqui.src.dtos;
 using Doaqui.src.models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Doaqui.src.repositories.implementations
 {
@@ -30,7 +32,7 @@ namespace Doaqui.src.repositories.implementations
 
 
         #region Methods
-        public void NovaDoacao(NovaDoacaoDTO doacao)
+        public async Task NovaDoacaoAsync(NovaDoacaoDTO doacao)
         {
             _contexto.Doacoes.Add(new DoacaoModelo
             {
@@ -40,10 +42,10 @@ namespace Doaqui.src.repositories.implementations
                 Descricao = doacao.DescricaoDoacao,
                 CNPJ_Doador = doacao.CNPJ_Doador,
             });
-            _contexto.SaveChanges();
+           await _contexto.SaveChangesAsync();
         }
 
-        public void AtualizarDoacao(AtualizarDoacaoDTO doacao)
+        public async Task AtualizarDoacaoAsync(AtualizarDoacaoDTO doacao)
         {
             DoacaoModelo modelo = new DoacaoModelo();
             modelo.Contato = doacao.Contato;
@@ -52,33 +54,33 @@ namespace Doaqui.src.repositories.implementations
             modelo.Descricao = doacao.DescricaoDoacao;
             modelo.CNPJ_Doador = doacao.CNPJ_Doador;
             _contexto.Update(modelo);
-            _contexto.SaveChanges();
+           await _contexto.SaveChangesAsync();
         } 
 
-        public void DeletarDoacao(int id)
+        public async Task DeletarDoacaoAsync(int id)
         {
-            _contexto.Doacoes.Remove(PegarDoacaoPeloId(id));
-            _contexto.SaveChanges();
+            _contexto.Doacoes.Remove(await PegarDoacaoPeloIdAsync(id));
+           await _contexto.SaveChangesAsync();
         }
 
-        public DoacaoModelo PegarDoacaoPeloId(int id)
+        public async Task<DoacaoModelo> PegarDoacaoPeloIdAsync(int id)
         {
-            return _contexto.Doacoes.FirstOrDefault(d => d.Id == id);
+            return await _contexto.Doacoes.FirstOrDefaultAsync(d => d.Id == id);
         }
 
-        public DoacaoModelo PegarDoacaoPeloCnpj(int cnpj)
+        public async Task<DoacaoModelo> PegarDoacaoPeloCnpjAsync(int cnpj)
         {
-            return _contexto.Doacoes.FirstOrDefault(d => d.CNPJ_Doador == cnpj);
+            return await _contexto.Doacoes.FirstOrDefaultAsync(d => d.CNPJ_Doador == cnpj);
         }
 
-        public DoacaoModelo PegarDoacaoPeloContato(string contato)
+        public async Task<DoacaoModelo> PegarDoacaoPeloContatoAsync(string contato)
         {
-            return _contexto.Doacoes.FirstOrDefault(d => d.Contato == contato);
+            return await _contexto.Doacoes.FirstOrDefaultAsync(d => d.Contato == contato);
         }
 
-        public List<DoacaoModelo> PegarTodasDoacoes()
+        public async Task<List<DoacaoModelo>> PegarTodasDoacoesAsync()
         {
-            return _contexto.Doacoes.ToList();
+            return await _contexto.Doacoes.ToListAsync();
         }
         #endregion
 
