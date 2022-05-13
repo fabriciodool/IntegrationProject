@@ -32,6 +32,11 @@ namespace Doaqui.src.repositories.implementations
 
 
         #region Methods
+
+         /// <summary>
+        /// <para>Resumo: Método assíncrono para salvar uma nova solicitacao</para>
+        /// </summary>
+        /// <param name="solicitacao">NovaSolicitacaoDTO</param>
         public async Task NovaSolicitacaoAsync(NovaSolicitacaoDTO solicitacao)
         {
             _contexto.Solicitacoes.Add(new SolicitacaoModelo
@@ -42,6 +47,10 @@ namespace Doaqui.src.repositories.implementations
           await _contexto.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para atualizar uma nova solicitacao</para>
+        /// </summary>
+        /// <param name="solicitacao">AtualizarSolicitacaoDTO</param>
         public async Task AtualizarSolicitacaoAsync(AtualizarSolicitacaoDTO solicitacao)
         {
             SolicitacaoModelo modelo = await PegarSolicitacaoPeloCnpjAsync(solicitacao.Cnpj);
@@ -51,17 +60,30 @@ namespace Doaqui.src.repositories.implementations
            await _contexto.SaveChangesAsync();
         }
 
+         /// <summary>
+        /// <para>Resumo: Método assíncrono para deletar uma solicitacao</para>
+        /// </summary>
+        /// <param name="Cnpj">Cnpj da solicitacao</param>
         public async Task DeletarSolicitacaoAsync(int Cnpj)
         {
             _contexto.Solicitacoes.Remove(await PegarSolicitacaoPeloCnpjAsync(Cnpj));
           await _contexto.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar uma solicitacao pelo Cnpj</para>
+        /// </summary>
+        /// <param name="Cnpj">Cnpj da solicitacao</param>
+        /// <return>SolicitacoesModelo</return>
         public async Task<SolicitacaoModelo> PegarSolicitacaoPeloCnpjAsync(int id)
         {
             return await _contexto.Solicitacoes.FirstOrDefaultAsync(r => r.Id == id);
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar todas solicitacoes</para>
+        /// </summary>
+        /// <return>SolicitacoesModelo</return>
         public async Task<List<SolicitacaoModelo>> PegarTodasSolicitacoesAsync()
         {
             return await _contexto.Solicitacoes.ToListAsync();
