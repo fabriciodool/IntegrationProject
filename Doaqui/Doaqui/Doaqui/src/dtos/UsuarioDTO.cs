@@ -70,8 +70,9 @@ namespace Doaqui.src.dtos
         [Required, StringLength(30)]
         public string Senha { get; set; }
 
-        public AtualizarUsuarioDTO(string nome, string email, string telefone, string endereco, string senha)
+        public AtualizarUsuarioDTO(int cnpj_ong, string nome, string email, string telefone, string endereco, string senha)
         {
+            CNPJ_ONG = cnpj_ong;
             Nome = nome;
             Telefone = telefone;
             Endereco = endereco;
