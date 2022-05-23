@@ -47,7 +47,8 @@ namespace Doaqui.src.repositories.implementations
                 Telefone = usuario.Telefone,
                 Endereco = usuario.Endereco,
                 Senha = usuario.Senha,
-                Tipo = usuario.Tipo
+                Tipo = usuario.Tipo,
+                Cnpj = usuario.Cnpj
 
             });
            await _contexto.SaveChangesAsync();
@@ -64,6 +65,7 @@ namespace Doaqui.src.repositories.implementations
             modelo.Telefone = usuario.Telefone;
             modelo.Endereco = usuario.Endereco;
             modelo.Senha = usuario.Senha;
+            modelo.Cnpj = usuario.Cnpj;
             _contexto.Update(modelo);
            await _contexto.SaveChangesAsync();
         }

@@ -37,5 +37,8 @@ namespace Doaqui.src.models
 
         [Required]
         public TipoUsuario Tipo { get; set; }
+
+        [Required]
+        public int Cnpj { get; set; }
     }
 }
