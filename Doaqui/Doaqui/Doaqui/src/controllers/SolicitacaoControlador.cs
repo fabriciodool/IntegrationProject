@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Doaqui.src.dtos;
+using Doaqui.src.models;
 using Doaqui.src.repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Doaqui.src.controllers
@@ -27,6 +29,13 @@ namespace Doaqui.src.controllers
 
         #region Metodos
 
+        /// <summary>
+        /// Pegar solicitacao pelo Cnpj
+        /// </summary>
+        /// <param name="CnpjSolicitacao">int</param>
+        /// <returns>ActionResult</returns>
+        /// <response code="200">Retorna a solicitacao</response>
+        /// <response code="404">Usuario não existente</response>
         [HttpGet("cnpj/{idsolicitacao")]
         public async Task<ActionResult> PegarSolicitacaoPeloCnpjAsync([FromRoute] int cnpjSolicitacao)
         {
@@ -37,6 +46,13 @@ namespace Doaqui.src.controllers
             return Ok(solicitacao);
         }
 
+         /// <summary>
+        /// Pegar todas solicitacoes pelo Cnpj
+        /// </summary>
+        /// <param name="solicitacao">int</param>
+        /// <returns>ActionResult</returns>
+        /// <response code="200">Retorna todas solicitacoes</response>
+        /// <response code="404">Usuario não existente</response>
         [HttpGet]
         public async Task<ActionResult> PegarTodasSolicitacoesAsync()
         {
@@ -47,6 +63,29 @@ namespace Doaqui.src.controllers
             return Ok(lista);
         }
 
+        /// <summary>
+        /// Criar nova solicitacao
+        /// </summary>
+        /// <param name="solicitacao">NovaSolicitacaoDTO</param>
+        /// <returns>ActionResult</returns>
+        /// <remarks>
+        /// Exemplo de requisição:
+        ///
+        ///     POST /api/Usuarios
+        ///     {
+        ///        "nome": "Naomy Santana",
+        ///        "email": "naozinha@email.com",
+        ///        "senha": "134652",
+        ///        "foto": "URLFOTO",
+        ///        "tipo": "NORMAL"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="201">Retorna solicitacao criado</response>
+        /// <response code="400">Erro na requisição</response>
+        /// <response code="401">E-mail ja cadastrado</response>
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(SolicitacaoModelo))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<ActionResult> NovaSolicitacaoAsync(NovaSolicitacaoDTO solicitacao)
         {
@@ -58,6 +97,27 @@ namespace Doaqui.src.controllers
 
         }
 
+        /// <summary>
+        /// Atualizar Solicitacao
+        /// </summary>
+        /// <param name="solicitacao">AtualizarSolicitacaoDTO</param>
+        /// <returns>ActionResult</returns>
+        /// <remarks>
+        /// Exemplo de requisição:
+        ///
+        ///     PUT /api/Usuarios
+        ///     {
+        ///        "id": 1,    
+        ///        "nome": "Naomy Santana",
+        ///        "senha": "134652",
+        ///        "foto": "URLFOTO"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Retorna solicitacao atualizada</response>
+        /// <response code="400">Erro na requisição</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
         public async Task<ActionResult> AtualizarSolicitacaoAsync([FromBody] AtualizarSolicitacaoDTO solicitacao)
         {
@@ -67,11 +127,17 @@ namespace Doaqui.src.controllers
 
             return Ok(solicitacao);
         }
-
+        /// <summary>
+        /// Deletar solicitacao pelo Cnpj
+        /// </summary>
+        /// <param name="CnpjUsuario">int</param>
+        /// <returns>ActionResult</returns>
+        /// <response code="204">Usuario deletado</response>
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpDelete]
-        public async Task<ActionResult> DeletarSolicitacaoAsync([FromRoute] int cnpjSolicitacao)
+        public async Task<ActionResult> DeletarSolicitacaoAsync([FromRoute] int CnpjSolicitacao)
         {
-           await _repositorio.DeletarSolicitacaoAsync(cnpjSolicitacao);
+           await _repositorio.DeletarSolicitacaoAsync(CnpjSolicitacao);
             return NoContent();
         }
 

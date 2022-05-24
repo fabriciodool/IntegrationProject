@@ -6,6 +6,13 @@ using Doaqui.src.utilidades;
 
 namespace Doaqui.src.models
 {
+    /// <summary>
+    /// <para>Resumo: Classe responsavel por representar tb_usuarios no banco.</para>
+    /// <para>Criado por: Naomy Santana</para>
+    /// <para>Versão: 1.0</para>
+    /// <para>Data: 13/05/2022</para>
+    /// </summary>
+    
     [Table("tb_Usuarios")]
     public class UsuarioModelo
     {
@@ -30,5 +37,8 @@ namespace Doaqui.src.models
 
         [Required]
         public TipoUsuario Tipo { get; set; }
+
+        [Required]
+        public int Cnpj { get; set; }
     }
 }

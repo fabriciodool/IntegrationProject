@@ -32,6 +32,11 @@ namespace Doaqui.src.repositories.implementations
 
 
         #region Methods
+
+         /// <summary>
+        /// <para>Resumo: Método assíncrono para salvar uma nova doacao</para>
+        /// </summary>
+        /// <param name="doacao">NovaDoacaoDTO</param>
         public async Task NovaDoacaoAsync(NovaDoacaoDTO doacao)
         {
             _contexto.Doacoes.Add(new DoacaoModelo
@@ -45,6 +50,10 @@ namespace Doaqui.src.repositories.implementations
            await _contexto.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para atualizar uma doacao</para>
+        /// </summary>
+        /// <param name="doacao">AtualizarDoacaoDTO</param>
         public async Task AtualizarDoacaoAsync(AtualizarDoacaoDTO doacao)
         {
             DoacaoModelo modelo = new DoacaoModelo();
@@ -57,22 +66,37 @@ namespace Doaqui.src.repositories.implementations
            await _contexto.SaveChangesAsync();
         } 
 
+         /// <summary>
+        /// <para>Resumo: Método assíncrono para deletar uma doacao</para>
+        /// </summary>
+        /// <param name="Cnpj">Cnpj da doacao</param>
         public async Task DeletarDoacaoAsync(int id)
         {
-            _contexto.Doacoes.Remove(await PegarDoacaoPeloIdAsync(id));
+            _contexto.Doacoes.Remove(await PegarDoacaoPeloCnpjAsync(id));
            await _contexto.SaveChangesAsync();
         }
+
 
         public async Task<DoacaoModelo> PegarDoacaoPeloIdAsync(int id)
         {
             return await _contexto.Doacoes.FirstOrDefaultAsync(d => d.Id == id);
         }
 
+         /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar uma doacao pelo Cnpj</para>
+        /// </summary>
+        /// <param name="Cnpj">Cnpj do usuario</param>
+        /// <return>DoacaoModelo</return>
         public async Task<DoacaoModelo> PegarDoacaoPeloCnpjAsync(int cnpj)
         {
             return await _contexto.Doacoes.FirstOrDefaultAsync(d => d.CNPJ_Doador == cnpj);
         }
 
+         /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar uma doacao pelo contato</para>
+        /// </summary>
+        /// <param name="contato">Contato do usuario</param>
+        /// <return>DoacaoModelo</return>
         public async Task<DoacaoModelo> PegarDoacaoPeloContatoAsync(string contato)
         {
             return await _contexto.Doacoes.FirstOrDefaultAsync(d => d.Contato == contato);

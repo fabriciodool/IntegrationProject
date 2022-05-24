@@ -32,6 +32,11 @@ namespace Doaqui.src.repositories.implementations
 
 
         #region Methods
+
+         /// <summary>
+        /// <para>Resumo: Método assíncrono para salvar um novo usuario</para>
+        /// </summary>
+        /// <param name="usuario">NovoUsuarioDTO</param>
         public async Task NovoUsuarioAsync(NovoUsuarioDTO usuario)
         {
             _contexto.Usuarios.Add(new UsuarioModelo
@@ -42,12 +47,17 @@ namespace Doaqui.src.repositories.implementations
                 Telefone = usuario.Telefone,
                 Endereco = usuario.Endereco,
                 Senha = usuario.Senha,
-                Tipo = usuario.Tipo
+                Tipo = usuario.Tipo,
+                Cnpj = usuario.Cnpj
 
             });
            await _contexto.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para atualizar um usuario</para>
+        /// </summary>
+        /// <param name="usuario">AtualizarUsuarioDTO</param>
         public async Task AtualizarUsuarioAsync(AtualizarUsuarioDTO usuario)
         {
             UsuarioModelo modelo = await PegarUsuarioPeloCnpjAsync(usuario.CNPJ_ONG);
@@ -55,28 +65,46 @@ namespace Doaqui.src.repositories.implementations
             modelo.Telefone = usuario.Telefone;
             modelo.Endereco = usuario.Endereco;
             modelo.Senha = usuario.Senha;
+            modelo.Cnpj = usuario.Cnpj;
             _contexto.Update(modelo);
            await _contexto.SaveChangesAsync();
         }
 
+         /// <summary>
+        /// <para>Resumo: Método assíncrono para deletar um usuario</para>
+        /// </summary>
+        /// <param name="Cnpj">Cnpj do usuario</param>
         public async Task DeletarUsuarioAsync(int cnpj)
         {
             _contexto.Usuarios.Remove(await PegarUsuarioPeloCnpjAsync(cnpj));
            await _contexto.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar um usuario pelo Cnpj</para>
+        /// </summary>
+        /// <param name="Cnpj">Cnpj do usuario</param>
+        /// <return>UsuarioModelo</return>
         public async Task<UsuarioModelo> PegarUsuarioPeloCnpjAsync(int cnpj)
         {
             return await _contexto.Usuarios.FirstOrDefaultAsync(u => u.CNPJ_ONG == cnpj);
         }
-
+        /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar usuarios pelo nome</para>
+        /// </summary>
+        /// <param name="nome">Nome do usuario</param>
+        /// <return>Lista UsuarioModelo</return>
         public async Task<List<UsuarioModelo>> PegarUsuariosPeloNomeAsync(string nome)
         {
             return await _contexto.Usuarios
             .Where(u => u.Nome == nome)
             .ToListAsync();
         }
-
+         /// <summary>
+        /// <para>Resumo: Método assíncrono para pegar um usuario pelo email</para>
+        /// </summary>
+        /// <param name="email">Email do usuario</param>
+        /// <return>UsuarioModelo</return>
         public async Task<UsuarioModelo> PegarUsuarioPeloEmailAsync(string email)
         {
             return await _contexto.Usuarios.FirstOrDefaultAsync(u => u.Email == email);

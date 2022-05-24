@@ -30,7 +30,7 @@ namespace DoaquiTeste.Test.repositories
 
             await _repositorio.NovoUsuarioAsync(
                 new NovoUsuarioDTO(445482400, "TesteUsuario", "testeemail@email.com",
-                "40028922","av. pitangas 123", "senhateste", TipoUsuario.ONG));
+                "40028922","av. pitangas 123", "senhateste", TipoUsuario.ONG, 46758495));
         }
     }
 }
