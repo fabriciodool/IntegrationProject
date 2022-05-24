@@ -11,7 +11,7 @@ namespace Doaqui.src.models
     {
 
         [Key]
-        public int CNPJ_ONG { get; set; }
+        public int Id { get; set; }
 
         [Required, StringLength(50)]
         public string Nome { get; set; }

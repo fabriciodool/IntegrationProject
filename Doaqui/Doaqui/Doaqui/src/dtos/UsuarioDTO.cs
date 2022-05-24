@@ -12,7 +12,7 @@ namespace Doaqui.src.dtos
     public class NovoUsuarioDTO
     {
         [Key]
-        public int CNPJ_ONG { get; set; }
+        public int Id { get; set; }
 
         [Required, StringLength(50)]
         public string Nome { get; set; }
@@ -32,9 +32,9 @@ namespace Doaqui.src.dtos
         [Required]
         public TipoUsuario Tipo { get; set; }
 
-        public NovoUsuarioDTO(int cnpj_ong, string nome, string email, string telefone, string endereco, string senha, TipoUsuario tipo)
+        public NovoUsuarioDTO(int id, string nome, string email, string telefone, string endereco, string senha, TipoUsuario tipo)
         {
-            CNPJ_ONG = cnpj_ong;
+            Id = id;
             Nome = nome;
             Email = email;
             Telefone = telefone;
@@ -52,8 +52,8 @@ namespace Doaqui.src.dtos
     /// </summary>
     public class AtualizarUsuarioDTO
     {
-        [Required, StringLength(14)]
-        public int CNPJ_ONG { get; set; }
+        [Required]
+        public int Id { get; set; }
 
         [Required, StringLength(50)]
         public string Nome { get; set; }

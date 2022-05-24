@@ -23,9 +23,9 @@ namespace Doaqui.src.controllers
 
         #region Métodos
         [HttpGet("id/{idUsuario}")]
-        public async Task<ActionResult> PegarUsuarioPeloCnpjAsync([FromRoute] int idUsuario)
+        public async Task<ActionResult> PegarUsuarioPeloIdAsync([FromRoute] int idUsuario)
         {
-            var usuario = await _repositorio.PegarUsuarioPeloCnpjAsync(idUsuario);
+            var usuario = await _repositorio.PegarUsuarioPeloIdAsync(idUsuario);
             if (usuario == null) return NotFound();
             return Ok(usuario);
         }

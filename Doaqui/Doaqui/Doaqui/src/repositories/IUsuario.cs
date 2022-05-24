@@ -14,12 +14,12 @@ namespace Doaqui.src.repositories
     /// </summary>
     public interface IUsuario
     {
-        Task <UsuarioModelo> PegarUsuarioPeloCnpjAsync(int cnpj);
+        Task <UsuarioModelo> PegarUsuarioPeloIdAsync(int cnpj);
         Task <List <UsuarioModelo>> PegarUsuariosPeloNomeAsync(string nome);
         Task <UsuarioModelo> PegarUsuarioPeloEmailAsync(string email);
         Task NovoUsuarioAsync(NovoUsuarioDTO usuario);
         Task AtualizarUsuarioAsync(AtualizarUsuarioDTO usuario);
-        Task DeletarUsuarioAsync(int cnpj);
+        Task DeletarUsuarioAsync(int id);
     }
 
 }
