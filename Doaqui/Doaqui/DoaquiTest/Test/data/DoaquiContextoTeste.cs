@@ -25,7 +25,7 @@ namespace DoaquiTest.Test.data
         public void InsertNewUserReturnsUser()
         {
             UsuarioModelo model = new UsuarioModelo();
-            model.CNPJ_ONG = 000000000;
+            model.Id = 000000000;
             model.Nome = "TestName";
             model.Email = "TestEmail";
             model.Telefone = "TestPhone";
@@ -55,7 +55,7 @@ namespace DoaquiTest.Test.data
             model.Quantidade = 10000;
             model.Validade = "TestValidity";
             model.Descricao = "TestDescription";
-            model.CNPJ_Doador = 000000000;
+            model.CNPJ_Doador = "000000000";
             _context.Doacoes.Add(model);
             _context.SaveChanges();
             Assert.IsNotNull(_context.Doacoes.FirstOrDefault(d => d.Id == 1));

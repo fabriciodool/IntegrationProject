@@ -85,7 +85,7 @@ namespace Doaqui
             {
                 s.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Blog Pessoal",
+                    Title = "Doaqui",
                     Version = "v1"
                 });
                 s.AddSecurityDefinition(
@@ -130,7 +130,7 @@ namespace Doaqui
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Doaqui v1");
                     c.RoutePrefix = string.Empty;
                 });
             }
@@ -140,7 +140,7 @@ namespace Doaqui
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogPessoal v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Doaqui v1");
                 c.RoutePrefix = string.Empty;
             });
             // Rotas
