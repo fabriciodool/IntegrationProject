@@ -73,7 +73,7 @@ namespace Doaqui.src.repositories.implementations
         /// <summary>
         /// <para>Resumo: Método assíncrono para pegar uma solicitacao pelo Cnpj</para>
         /// </summary>
-        /// <param name="Cnpj">Cnpj da solicitacao</param>
+        /// <param name="id">Id da solicitacao</param>
         /// <return>SolicitacoesModelo</return>
         public async Task<SolicitacaoModelo> PegarSolicitacaoPeloCnpjAsync(int id)
         {

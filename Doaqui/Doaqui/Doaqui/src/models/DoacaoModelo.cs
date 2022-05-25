@@ -31,7 +31,7 @@ namespace Doaqui.src.models
         public string Descricao { get; set; }
 
         [Required, StringLength(14)]
-        public int CNPJ_Doador { get; set; }
+        public string CNPJ_Doador { get; set; }
           
     }
 }

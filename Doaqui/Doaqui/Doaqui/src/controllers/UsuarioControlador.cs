@@ -29,7 +29,7 @@ namespace Doaqui.src.controllers
         /// <summary>
         /// Pegar usuario pelo Cnpj
         /// </summary>
-        /// <param name="Usuario">int</param>
+        /// <param name="idUsuario">int</param>
         /// <returns>ActionResult</returns>
         /// <response code="200">Retorna o usuario</response>
         /// <response code="404">Usuario não existente</response>
@@ -62,16 +62,16 @@ namespace Doaqui.src.controllers
         /// <summary>
         /// Pegar usuario pelo Email
         /// </summary>
-        /// <param name="EmailUsuario">string</param>
+        /// <param name="emailUsuario">string</param>
         /// <returns>ActionResult</returns>
         /// <response code="200">Retorna o usuario</response>
         /// <response code="404">Email não existente</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioModelo))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("contato/{contatoUsuario}")]
-        public async Task<ActionResult> PegarUsuarioPeloEmailAsync([FromRoute] string contatoUsuario)
+        [HttpGet("email/{emailUsuario}")]
+        public async Task<ActionResult> PegarUsuarioPeloEmailAsync([FromRoute] string emailUsuario)
         {
-            var usuario = await _repositorio.PegarUsuarioPeloEmailAsync(contatoUsuario);
+            var usuario = await _repositorio.PegarUsuarioPeloEmailAsync(emailUsuario);
             if (usuario == null) return NotFound();
             return Ok(usuario);
         }
@@ -140,15 +140,15 @@ namespace Doaqui.src.controllers
         /// <summary>
         /// Deletar usuario pelo Cnpj
         /// </summary>
-        /// <param name="Cnpj">int</param>
+        /// <param name="id">int</param>
         /// <returns>ActionResult</returns>
         /// <response code="204">Usuario deletado</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [HttpDelete("deletar/{idUsuario}")]
         [Authorize(Roles = "ADMINISTRADOR")]
-        public async Task<ActionResult> DeletarUsuarioAsync([FromRoute] int usuario)
+        public async Task<ActionResult> DeletarUsuarioAsync([FromRoute] int id)
         {
-           await _repositorio.DeletarUsuarioAsync(usuario);
+           await _repositorio.DeletarUsuarioAsync(id);
             return NoContent();
         }
         #endregion Métodos
