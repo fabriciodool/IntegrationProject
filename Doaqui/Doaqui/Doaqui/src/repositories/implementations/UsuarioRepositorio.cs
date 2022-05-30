@@ -73,6 +73,10 @@ namespace Doaqui.src.repositories.implementations
         /// <summary>
         /// <para>Resumo: Método assíncrono para deletar um usuario</para>
         /// </summary>
+<<<<<<< HEAD
+=======
+        /// <param name="id">Id do usuario</param>
+>>>>>>> bf9b5b534c8eb055fcfef29de7ac74801ad9ea72
         public async Task DeletarUsuarioAsync(int id)
         {
             _contexto.Usuarios.Remove(await PegarUsuarioPeloIdAsync(id));
@@ -82,6 +86,10 @@ namespace Doaqui.src.repositories.implementations
         /// <summary>
         /// <para>Resumo: Método assíncrono para pegar um usuario pelo Cnpj</para>
         /// </summary>
+<<<<<<< HEAD
+=======
+        /// <param name="id">Id do usuario</param>
+>>>>>>> bf9b5b534c8eb055fcfef29de7ac74801ad9ea72
         /// <return>UsuarioModelo</return>
         public async Task<UsuarioModelo> PegarUsuarioPeloIdAsync(int id)
         {

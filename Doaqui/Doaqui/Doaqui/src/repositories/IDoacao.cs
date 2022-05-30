@@ -16,7 +16,7 @@ namespace Doaqui.src.repositories
     {
         Task<List<DoacaoModelo>> PegarTodasDoacoesAsync();
         Task <DoacaoModelo> PegarDoacaoPeloIdAsync(int id);
-        Task <DoacaoModelo> PegarDoacaoPeloCnpjAsync(int cnpj);
+        Task <DoacaoModelo> PegarDoacaoPeloCnpjAsync(string cnpj);
         Task <DoacaoModelo> PegarDoacaoPeloContatoAsync(string contato);
         Task NovaDoacaoAsync(NovaDoacaoDTO doacao);
         Task AtualizarDoacaoAsync(AtualizarDoacaoDTO doacao);

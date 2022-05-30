@@ -56,7 +56,7 @@ namespace Doaqui.src.repositories.implementations
         /// <param name="doacao">AtualizarDoacaoDTO</param>
         public async Task AtualizarDoacaoAsync(AtualizarDoacaoDTO doacao)
         {
-            DoacaoModelo modelo = new DoacaoModelo();
+            var modelo = await PegarDoacaoPeloIdAsync(doacao.Id);
             modelo.Contato = doacao.Contato;
             modelo.Quantidade = doacao.Quantidade;
             modelo.Validade = doacao.Validade;
@@ -69,10 +69,10 @@ namespace Doaqui.src.repositories.implementations
          /// <summary>
         /// <para>Resumo: Método assíncrono para deletar uma doacao</para>
         /// </summary>
-        /// <param name="Cnpj">Cnpj da doacao</param>
+        /// <param name="id">Id da doacao</param>
         public async Task DeletarDoacaoAsync(int id)
         {
-            _contexto.Doacoes.Remove(await PegarDoacaoPeloCnpjAsync(id));
+            _contexto.Doacoes.Remove(await PegarDoacaoPeloIdAsync(id));
            await _contexto.SaveChangesAsync();
         }
 
@@ -85,9 +85,9 @@ namespace Doaqui.src.repositories.implementations
          /// <summary>
         /// <para>Resumo: Método assíncrono para pegar uma doacao pelo Cnpj</para>
         /// </summary>
-        /// <param name="Cnpj">Cnpj do usuario</param>
+        /// <param name="cnpj">Cnpj do usuario</param>
         /// <return>DoacaoModelo</return>
-        public async Task<DoacaoModelo> PegarDoacaoPeloCnpjAsync(int cnpj)
+        public async Task<DoacaoModelo> PegarDoacaoPeloCnpjAsync(string cnpj)
         {
             return await _contexto.Doacoes.FirstOrDefaultAsync(d => d.CNPJ_Doador == cnpj);
         }

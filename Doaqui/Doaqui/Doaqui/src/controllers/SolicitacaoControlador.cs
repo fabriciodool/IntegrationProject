@@ -32,14 +32,14 @@ namespace Doaqui.src.controllers
         /// <summary>
         /// Pegar solicitacao pelo Cnpj
         /// </summary>
-        /// <param name="CnpjSolicitacao">int</param>
+        /// <param name="idsolicitacao">int</param>
         /// <returns>ActionResult</returns>
         /// <response code="200">Retorna a solicitacao</response>
         /// <response code="404">Usuario não existente</response>
-        [HttpGet("cnpj/{idsolicitacao")]
-        public async Task<ActionResult> PegarSolicitacaoPeloCnpjAsync([FromRoute] int cnpjSolicitacao)
+        [HttpGet("cnpj/{idsolicitacao}")]
+        public async Task<ActionResult> PegarSolicitacaoPeloCnpjAsync([FromRoute] int idsolicitacao)
         {
-            var solicitacao = await _repositorio.PegarSolicitacaoPeloCnpjAsync(cnpjSolicitacao);
+            var solicitacao = await _repositorio.PegarSolicitacaoPeloCnpjAsync(idsolicitacao);
 
             if (solicitacao == null) return NotFound();
 
@@ -49,7 +49,6 @@ namespace Doaqui.src.controllers
          /// <summary>
         /// Pegar todas solicitacoes pelo Cnpj
         /// </summary>
-        /// <param name="solicitacao">int</param>
         /// <returns>ActionResult</returns>
         /// <response code="200">Retorna todas solicitacoes</response>
         /// <response code="404">Usuario não existente</response>
@@ -130,14 +129,14 @@ namespace Doaqui.src.controllers
         /// <summary>
         /// Deletar solicitacao pelo Cnpj
         /// </summary>
-        /// <param name="CnpjUsuario">int</param>
+        /// <param name="idsolicitacao">int</param>
         /// <returns>ActionResult</returns>
         /// <response code="204">Usuario deletado</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [HttpDelete]
-        public async Task<ActionResult> DeletarSolicitacaoAsync([FromRoute] int CnpjSolicitacao)
+        [HttpDelete("delete/{idsolicitacao}")]
+        public async Task<ActionResult> DeletarSolicitacaoAsync([FromRoute] int idsolicitacao)
         {
-           await _repositorio.DeletarSolicitacaoAsync(CnpjSolicitacao);
+           await _repositorio.DeletarSolicitacaoAsync(idsolicitacao);
             return NoContent();
         }
 

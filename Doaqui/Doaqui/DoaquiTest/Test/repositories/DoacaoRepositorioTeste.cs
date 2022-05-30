@@ -29,7 +29,7 @@ namespace DoaquiTeste.Test.repositories
             _contexto = new DoaquiContexto(opt);
             _repositorio = new DoacaoRepositorio(_contexto);
 
-           await _repositorio.NovaDoacaoAsync(new NovaDoacaoDTO("11912345678", 2, "12/12/2022", "DescricaoTeste", 1234567891));
+           await _repositorio.NovaDoacaoAsync(new NovaDoacaoDTO("11912345678", 2, "12/12/2022", "DescricaoTeste", "1234567891"));
             List<DoacaoModelo> doacaoModelos = await _repositorio.PegarTodasDoacoesAsync();
             Assert.AreEqual(1, doacaoModelos.Count);
         }

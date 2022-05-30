@@ -3,7 +3,7 @@ using Doaqui.src.utilidades;
 
 namespace Doaqui.src.dtos
 {
-    // <summary>
+    /// <summary>
     /// <para>Resumo: Classe espelho para criar um novo usuario</para>
     /// <para>Criado por: Renata Nunes</para>
     /// <para>Versão: 2.0</para>
@@ -32,11 +32,19 @@ namespace Doaqui.src.dtos
         [Required]
         public TipoUsuario Tipo { get; set; }
 
+<<<<<<< HEAD
         //public NovoUsuarioDTO(int id, string nome, string email, string telefone, string endereco, string senha, TipoUsuario tipo) { }
 
         [Required, StringLength(12)]
         public int Cnpj { get; set; }
 
+=======
+          [Required]
+         public int Cnpj { get; set; }
+
+
+          
+>>>>>>> bf9b5b534c8eb055fcfef29de7ac74801ad9ea72
         public NovoUsuarioDTO(int id, string nome, string email, string telefone, string endereco, string senha, TipoUsuario tipo, int cnpj)
         {
             Id = id;
@@ -50,7 +58,7 @@ namespace Doaqui.src.dtos
         }
     }
 
-    // <summary>
+    /// <summary>
     /// <para>Resumo: Classe espelho para atualizar um usuario</para>
     /// <para>Criado por: Renata Nunes</para>
     /// <para>Versão: 2.0</para>

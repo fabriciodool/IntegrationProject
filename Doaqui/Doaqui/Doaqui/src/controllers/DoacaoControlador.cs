@@ -32,11 +32,10 @@ namespace Doaqui.src.controllers
         /// <summary>
         /// Pegar todas doacoes pelo Cnpj
         /// </summary>
-        /// <param name="doacao">int</param>
         /// <returns>ActionResult</returns>
         /// <response code="200">Retorna todas doacoes</response>
         /// <response code="404">Usuario não existente</response>
-        [HttpGet]
+        [HttpGet("todas")]
         public async Task<ActionResult> PegarTodasDoacoesAsync()
         {
             var lista = await _repositorio.PegarTodasDoacoesAsync();
@@ -48,12 +47,12 @@ namespace Doaqui.src.controllers
         /// <summary>
         /// Pegar doacao pelo Cnpj
         /// </summary>
-        /// <param name="Usuario">int</param>
+        /// <param name="cnpjDoacao">string</param>
         /// <returns>ActionResult</returns>
         /// <response code="200">Retorna a doacao</response>
         /// <response code="404">Doacao não existente</response>
-        [HttpGet("id/{cpnjDoacao}")]
-        public async Task<ActionResult> PegarDoacaoPeloCnpjAsync([FromRoute] int cnpjDoacao)
+        [HttpGet("cnpj/{cpnjDoacao}")]
+        public async Task<ActionResult> PegarDoacaoPeloCnpjAsync([FromRoute] string cnpjDoacao)
         {
             var tema = await _repositorio.PegarDoacaoPeloCnpjAsync(cnpjDoacao);
 
@@ -65,14 +64,14 @@ namespace Doaqui.src.controllers
         /// <summary>
         /// Pegar usuario pelo Email
         /// </summary>
-        /// <param name="EmailUsuario">string</param>
+        /// <param name="contato">E-mail</param>
         /// <returns>ActionResult</returns>
         /// <response code="200">Retorna o usuario</response>
         /// <response code="404">Email não existente</response>
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DoacaoModelo))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
-        public async Task<ActionResult> PegarDoacaoPeloEmail([FromQuery] string contato)
+        public async Task<ActionResult> PegarDoacaoPeloContato([FromQuery] string contato)
         {
             var doacoes = await _repositorio.PegarDoacaoPeloContatoAsync(contato);
 
@@ -147,7 +146,7 @@ namespace Doaqui.src.controllers
         /// <summary>
         /// Deletar doacao pelo Cnpj
         /// </summary>
-        /// <param name="Cnpj">int</param>
+        /// <param name="idDoacao">int</param>
         /// <returns>ActionResult</returns>
         /// <response code="204">Doacaio deletada</response>
         [ProducesResponseType(StatusCodes.Status204NoContent)]

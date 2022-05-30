@@ -14,6 +14,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Doaqui.src.servicos.implementacoes;
 using Doaqui.src.servicos;
+using System.Collections.Generic;
+using System.Reflection;
+using System.IO;
+using Doaqui.src.data;
 
 namespace Doaqui
 {
@@ -29,58 +33,110 @@ namespace Doaqui
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            IConfigurationRoot config = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json")
-                .Build();
-
-            // Contexto
-            services.AddDbContext<src.data.DoaquiContexto>(opt => opt.UseSqlServer(config.GetConnectionString("DefaultConnection")));
-
-            // Repositorios
-            services.AddScoped<IUsuario, UsuarioRepositorio>();
-            services.AddScoped<ISolicitacao, SolicitacaoRepositorio>();
-            services.AddScoped<IDoacao, DoacaoRepositorio>();
-
-            // Servicos
-             services.AddScoped<IAutenticacao, AutenticacaoServicos>();
-
-            // Controladores
-            services.AddControllers();
-            services.AddCors();
-
-            // Autentificacao
-            var key = Encoding.ASCII.GetBytes(Configuration["Settings:Secret"]);
-            services.AddAuthentication(x =>
+            // Configuraçãp Banco de Dados
+            if (Configuration["Enviroment:Start"] == "PROD")
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
+                services.AddEntityFrameworkNpgsql()
+                .AddDbContext<DoaquiContexto>(
+                opt =>
+                opt.UseNpgsql(Configuration["ConnectionStringsProd:DefaultConnection"]));
+            }
+            else
+            {
+                services.AddDbContext<DoaquiContexto>(
+                opt =>
+                opt.UseSqlServer(Configuration["ConnectionStringsDev:DefaultConnection"]));
+            }
+            // Configuração Repositorios
+            services.AddScoped<IUsuario, UsuarioRepositorio>();
+            services.AddScoped<IDoacao, DoacaoRepositorio>();
+            services.AddScoped<ISolicitacao, SolicitacaoRepositorio>();
+            // Configuração de Controladores
+            services.AddCors();
+            services.AddControllers();
+            // Configuração de Serviços
+            services.AddScoped<IAutenticacao, AutenticacaoServicos>();
+            // Configuração do Token Autenticação JWTBearer
+            var chave = Encoding.ASCII.GetBytes(Configuration["Settings:Secret"]);
+            services.AddAuthentication(
+            a =>
+            {
+                a.DefaultAuthenticateScheme =
+    JwtBearerDefaults.AuthenticationScheme;
+                a.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(
+            b =>
+            {
+                b.RequireHttpsMetadata = false;
+                b.SaveToken = true;
+                b.TokenValidationParameters = new TokenValidationParameters
                 {
-                    x.RequireHttpsMetadata = false;
-                    x.SaveToken = true;
-                    x.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(key),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-                });
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(chave),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            }
+            );
 
+<<<<<<< HEAD
             // Configure Swagger
             // TODO: Fix swagger add later on.
             services.AddSwaggerGen(c =>
+=======
+            // Configuração Swagger
+            services.AddSwaggerGen(
+            s =>
+>>>>>>> bf9b5b534c8eb055fcfef29de7ac74801ad9ea72
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Doaqui", Version = "v1" });
-            });
+                s.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Doaqui",
+                    Version = "v1"
+                });
+                s.AddSecurityDefinition(
+                "Bearer",
+                new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT authorization header utiliza: Bearer + JWT Token",
+                });
+                s.AddSecurityRequirement(
+                new OpenApiSecurityRequirement
+                {
+                    {
+                    new OpenApiSecurityScheme
+                    {
+                    Reference = new OpenApiReference
+                    {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                    }
+                    },
+                    new List<string>()
+                    }
+                                    });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                s.IncludeXmlComments(xmlPath);
+            }
+            );
         }
+<<<<<<< HEAD
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, src.data.DoaquiContexto contexto)
         {
             // Development Environment
+=======
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DoaquiContexto contexto)
+        {
+            // Ambiente de Desenvolvimento
+>>>>>>> bf9b5b534c8eb055fcfef29de7ac74801ad9ea72
             if (env.IsDevelopment())
             {
                 contexto.Database.EnsureCreated();
@@ -89,37 +145,49 @@ namespace Doaqui
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Doaqui v1");
+<<<<<<< HEAD
                     //c.RoutePrefix = string.Empty;
                 });
             }
 
             // Production Environment
+=======
+                    c.RoutePrefix = string.Empty;
+                });
+            }
+            // Ambiente de produção
+>>>>>>> bf9b5b534c8eb055fcfef29de7ac74801ad9ea72
             contexto.Database.EnsureCreated();
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Doaqui v1");
+<<<<<<< HEAD
                 //c.RoutePrefix = string.Empty;
             });
 
+=======
+                c.RoutePrefix = string.Empty;
+            });
+            // Rotas
+>>>>>>> bf9b5b534c8eb055fcfef29de7ac74801ad9ea72
             app.UseRouting();
-
-            app.UseAuthorization();
-
             app.UseCors(c => c
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
             );
-
+            // Autenticação e Autorização
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(
+            endpoints =>
             {
                 endpoints.MapControllers();
-            });
+            }
+            );
         }
     }
-}
+}                
+        
