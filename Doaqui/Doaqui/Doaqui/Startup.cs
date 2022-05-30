@@ -47,13 +47,16 @@ namespace Doaqui
                 opt =>
                 opt.UseSqlServer(Configuration["ConnectionStringsDev:DefaultConnection"]));
             }
+
             // Configuração Repositorios
             services.AddScoped<IUsuario, UsuarioRepositorio>();
             services.AddScoped<IDoacao, DoacaoRepositorio>();
             services.AddScoped<ISolicitacao, SolicitacaoRepositorio>();
+
             // Configuração de Controladores
             services.AddCors();
             services.AddControllers();
+
             // Configuração de Serviços
             services.AddScoped<IAutenticacao, AutenticacaoServicos>();
             // Configuração do Token Autenticação JWTBearer
@@ -62,7 +65,7 @@ namespace Doaqui
             a =>
             {
                 a.DefaultAuthenticateScheme =
-    JwtBearerDefaults.AuthenticationScheme;
+                JwtBearerDefaults.AuthenticationScheme;
                 a.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(
             b =>
@@ -79,15 +82,13 @@ namespace Doaqui
             }
             );
 
-<<<<<<< HEAD
             // Configure Swagger
             // TODO: Fix swagger add later on.
             services.AddSwaggerGen(c =>
-=======
+
             // Configuração Swagger
             services.AddSwaggerGen(
             s =>
->>>>>>> bf9b5b534c8eb055fcfef29de7ac74801ad9ea72
             {
                 s.SwaggerDoc("v1", new OpenApiInfo
                 {
@@ -124,19 +125,13 @@ namespace Doaqui
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 s.IncludeXmlComments(xmlPath);
             }
-            );
+            ));
         }
-<<<<<<< HEAD
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, src.data.DoaquiContexto contexto)
-        {
-            // Development Environment
-=======
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DoaquiContexto contexto)
         {
             // Ambiente de Desenvolvimento
->>>>>>> bf9b5b534c8eb055fcfef29de7ac74801ad9ea72
+
             if (env.IsDevelopment())
             {
                 contexto.Database.EnsureCreated();
@@ -145,39 +140,30 @@ namespace Doaqui
                 app.UseSwaggerUI(c =>
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Doaqui v1");
-<<<<<<< HEAD
-                    //c.RoutePrefix = string.Empty;
-                });
-            }
-
-            // Production Environment
-=======
                     c.RoutePrefix = string.Empty;
                 });
             }
+
             // Ambiente de produção
->>>>>>> bf9b5b534c8eb055fcfef29de7ac74801ad9ea72
             contexto.Database.EnsureCreated();
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Doaqui v1");
-<<<<<<< HEAD
-                //c.RoutePrefix = string.Empty;
-            });
-
-=======
                 c.RoutePrefix = string.Empty;
             });
+            
             // Rotas
->>>>>>> bf9b5b534c8eb055fcfef29de7ac74801ad9ea72
             app.UseRouting();
+
+            // Controladores
             app.UseCors(c => c
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader()
             );
+
             // Autenticação e Autorização
             app.UseAuthentication();
             app.UseAuthorization();
@@ -187,6 +173,7 @@ namespace Doaqui
                 endpoints.MapControllers();
             }
             );
+
         }
     }
 }                
