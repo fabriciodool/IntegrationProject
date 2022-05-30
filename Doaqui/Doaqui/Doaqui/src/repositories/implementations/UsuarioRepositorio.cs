@@ -41,7 +41,7 @@ namespace Doaqui.src.repositories.implementations
         {
             _contexto.Usuarios.Add(new UsuarioModelo
             {
-                CNPJ_ONG = usuario.CNPJ_ONG,
+                Id = usuario.Id,
                 Nome = usuario.Nome,
                 Email = usuario.Email,
                 Telefone = usuario.Telefone,
@@ -60,7 +60,7 @@ namespace Doaqui.src.repositories.implementations
         /// <param name="usuario">AtualizarUsuarioDTO</param>
         public async Task AtualizarUsuarioAsync(AtualizarUsuarioDTO usuario)
         {
-            UsuarioModelo modelo = await PegarUsuarioPeloCnpjAsync(usuario.CNPJ_ONG);
+            UsuarioModelo modelo = await PegarUsuarioPeloIdAsync(usuario.Id);
             modelo.Nome = usuario.Nome;
             modelo.Telefone = usuario.Telefone;
             modelo.Endereco = usuario.Endereco;
@@ -70,25 +70,24 @@ namespace Doaqui.src.repositories.implementations
            await _contexto.SaveChangesAsync();
         }
 
-         /// <summary>
+        /// <summary>
         /// <para>Resumo: Método assíncrono para deletar um usuario</para>
         /// </summary>
-        /// <param name="Cnpj">Cnpj do usuario</param>
-        public async Task DeletarUsuarioAsync(int cnpj)
+        public async Task DeletarUsuarioAsync(int id)
         {
-            _contexto.Usuarios.Remove(await PegarUsuarioPeloCnpjAsync(cnpj));
+            _contexto.Usuarios.Remove(await PegarUsuarioPeloIdAsync(id));
            await _contexto.SaveChangesAsync();
         }
 
         /// <summary>
         /// <para>Resumo: Método assíncrono para pegar um usuario pelo Cnpj</para>
         /// </summary>
-        /// <param name="Cnpj">Cnpj do usuario</param>
         /// <return>UsuarioModelo</return>
-        public async Task<UsuarioModelo> PegarUsuarioPeloCnpjAsync(int cnpj)
+        public async Task<UsuarioModelo> PegarUsuarioPeloIdAsync(int id)
         {
-            return await _contexto.Usuarios.FirstOrDefaultAsync(u => u.CNPJ_ONG == cnpj);
+            return await _contexto.Usuarios.FirstOrDefaultAsync(u => u.Id == id);
         }
+
         /// <summary>
         /// <para>Resumo: Método assíncrono para pegar usuarios pelo nome</para>
         /// </summary>
@@ -100,6 +99,7 @@ namespace Doaqui.src.repositories.implementations
             .Where(u => u.Nome == nome)
             .ToListAsync();
         }
+
          /// <summary>
         /// <para>Resumo: Método assíncrono para pegar um usuario pelo email</para>
         /// </summary>

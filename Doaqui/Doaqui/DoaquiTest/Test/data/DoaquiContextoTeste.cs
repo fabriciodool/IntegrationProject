@@ -25,7 +25,7 @@ namespace DoaquiTest.Test.data
         public void InsertNewUserReturnsUser()
         {
             UsuarioModelo model = new UsuarioModelo();
-            model.CNPJ_ONG = 000000000;
+            model.Id = 000000000;
             model.Nome = "TestName";
             model.Email = "TestEmail";
             model.Telefone = "TestPhone";

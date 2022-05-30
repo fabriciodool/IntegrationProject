@@ -69,6 +69,8 @@ namespace Doaqui
                     };
                 });
 
+            // Configure Swagger
+            // TODO: Fix swagger add later on.
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Doaqui", Version = "v1" });
@@ -76,18 +78,30 @@ namespace Doaqui
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, src.data.DoaquiContexto contexto
-)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, src.data.DoaquiContexto contexto)
         {
+            // Development Environment
             if (env.IsDevelopment())
             {
                 contexto.Database.EnsureCreated();
                 app.UseDeveloperExceptionPage();
-
-                app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Doaqui v1"));
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Doaqui v1");
+                    //c.RoutePrefix = string.Empty;
+                });
             }
+
+            // Production Environment
+            contexto.Database.EnsureCreated();
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Doaqui v1");
+                //c.RoutePrefix = string.Empty;
+            });
 
             app.UseRouting();
 

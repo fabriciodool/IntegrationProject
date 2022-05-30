@@ -32,14 +32,12 @@ namespace Doaqui.src.dtos
         [Required]
         public TipoUsuario Tipo { get; set; }
 
-<<<<<<< HEAD
-        public NovoUsuarioDTO(int id, string nome, string email, string telefone, string endereco, string senha, TipoUsuario tipo)
-=======
+        //public NovoUsuarioDTO(int id, string nome, string email, string telefone, string endereco, string senha, TipoUsuario tipo) { }
+
         [Required, StringLength(12)]
         public int Cnpj { get; set; }
 
-        public NovoUsuarioDTO(int cnpj_ong, string nome, string email, string telefone, string endereco, string senha, TipoUsuario tipo, int cnpj)
->>>>>>> 33e44b26207b4268685a83ebbe4b8b833ded7f53
+        public NovoUsuarioDTO(int id, string nome, string email, string telefone, string endereco, string senha, TipoUsuario tipo, int cnpj)
         {
             Id = id;
             Nome = nome;
@@ -81,9 +79,9 @@ namespace Doaqui.src.dtos
          [Required, StringLength(12)]
         public int Cnpj { get; set; }
 
-        public AtualizarUsuarioDTO(int cnpj_ong, string nome, string email, string telefone, string endereco, string senha, int cnpj)
+        public AtualizarUsuarioDTO(int id, string nome, string email, string telefone, string endereco, string senha, int cnpj)
         {
-            CNPJ_ONG = cnpj_ong;
+            Id = id;
             Nome = nome;
             Telefone = telefone;
             Endereco = endereco;

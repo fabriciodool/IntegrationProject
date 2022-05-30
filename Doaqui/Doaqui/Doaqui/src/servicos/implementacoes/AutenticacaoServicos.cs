@@ -106,7 +106,7 @@ namespace Doaqui.src.servicos.implementacoes
 
             if (usuario.Senha != CodificarSenha(dto.Senha)) throw new Exception("Senha incorreta");
 
-            return new  AutorizacaoDTO (usuario.CNPJ_ONG, usuario.Email, usuario.Tipo, GerarToken(usuario));
+            return new  AutorizacaoDTO (usuario.Id, usuario.Email, usuario.Tipo, GerarToken(usuario));
         }
 
         #endregion
