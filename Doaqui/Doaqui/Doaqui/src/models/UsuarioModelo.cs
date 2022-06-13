@@ -40,5 +40,9 @@ namespace Doaqui.src.models
 
         [Required]
         public int Cnpj { get; set; }
+
+        [Required, StringLength(50)]
+
+        public string Titulo { get; set; }
     }
 }

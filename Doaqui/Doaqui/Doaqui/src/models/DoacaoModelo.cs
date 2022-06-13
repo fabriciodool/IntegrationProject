@@ -32,6 +32,10 @@ namespace Doaqui.src.models
 
         [Required, StringLength(14)]
         public string CNPJ_Doador { get; set; }
+
+        [Required, StringLength(50)]
+
+        public string Titulo { get; set; }
           
     }
 }

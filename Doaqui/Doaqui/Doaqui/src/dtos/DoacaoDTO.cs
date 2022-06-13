@@ -11,6 +11,7 @@ namespace Doaqui.src.dtos
     public class NovaDoacaoDTO
     {
         [Required, StringLength(100)]
+        
         public string Contato{ get; set; }
 
         [Required]
@@ -24,15 +25,20 @@ namespace Doaqui.src.dtos
         
         [Required, StringLength(14)]
         public string CNPJ_Doador { get; set; }
+        
+        [Required, StringLength(50)]
+        public string Titulo { get; set; }
 
-        public NovaDoacaoDTO(string contato, int quantidade, string validade, string descricaoDoacao, string cnpj_doador)
+        public NovaDoacaoDTO(string contato, int quantidade, string validade, string descricaoDoacao, string cnpj_doador, string titulo)
         {
             Contato = contato;
             Quantidade = quantidade;
             Validade = validade;
             DescricaoDoacao = descricaoDoacao;
             CNPJ_Doador = cnpj_doador;
+            Titulo = titulo;
         }
+        
     }
 
     /// <summary>
@@ -58,17 +64,23 @@ namespace Doaqui.src.dtos
         [Required, StringLength(30)]
         public string Validade  { get; set; }
 
-        [Required, StringLength(30)]
+        [Required, StringLength(200)]
         public string DescricaoDoacao { get; set; }
 
-        public AtualizarDoacaoDTO(int id, string cNPJ_Doador, string contato, int quantidade, string validade, string descricaoDoacao)
+        [Required, StringLength(50)]
+
+        public string Titulo { get; set; }
+
+        public AtualizarDoacaoDTO(int id, string cNPJ_Doador, string contato, int quantidade, string validade, string descricaoDoacao, string titulo)
         {
             Id = id;
+            Titulo = titulo;
             CNPJ_Doador = cNPJ_Doador;
             Contato = contato;
             Quantidade = quantidade;
             Validade = validade;
             DescricaoDoacao = descricaoDoacao;
         }
+        
     }
 }
