@@ -38,7 +38,10 @@ namespace Doaqui.src.dtos
         [Required, StringLength(50)]
         public string Titulo { get; set; }
 
-        public NovoUsuarioDTO(int id, string nome, string email, string telefone, string endereco, string senha, TipoUsuario tipo, int cnpj, string titulo)
+        [Required, StringLength(500)]
+        public string Foto { get; set; }
+
+        public NovoUsuarioDTO(int id, string nome, string email, string telefone, string endereco, string senha, TipoUsuario tipo, int cnpj, string titulo, string foto)
         {
             Id = id;
             Nome = nome;
@@ -49,6 +52,7 @@ namespace Doaqui.src.dtos
             Tipo = tipo;
             Cnpj = cnpj;
             Titulo = titulo;
+            Foto = foto;
         }
 
     }
@@ -83,8 +87,11 @@ namespace Doaqui.src.dtos
         public int Cnpj { get; set; }
 
         [Required, StringLength(50)]
-        public int Titulo { get; set; }
-        public AtualizarUsuarioDTO(int id, string nome, string email, string telefone, string endereco, string senha, int cnpj)
+        public string Titulo { get; set; }
+
+        [Required, StringLength(500)]
+        public string Foto { get; set; }
+        public AtualizarUsuarioDTO(int id, string nome, string email, string telefone, string endereco, string senha, int cnpj, string titulo, string foto)
         {
             Id = id;
             Nome = nome;
@@ -93,7 +100,8 @@ namespace Doaqui.src.dtos
             Endereco = endereco;
             Senha = senha;
             Cnpj = cnpj;
-
+            Titulo = titulo;
+            Foto = foto;
         }
     }
 }

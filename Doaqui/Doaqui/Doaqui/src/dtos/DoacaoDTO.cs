@@ -1,7 +1,7 @@
-using System.ComponentModel.DataAnnotations; 
+using System.ComponentModel.DataAnnotations;
 
 namespace Doaqui.src.dtos
-{ 
+{
     /// <summary>
     /// <para>Resumo: Classe espelho para cria nova postagem de doação</para>
     /// <para>Criado por: Renata Nunes</para>
@@ -11,25 +11,29 @@ namespace Doaqui.src.dtos
     public class NovaDoacaoDTO
     {
         [Required, StringLength(100)]
-        
-        public string Contato{ get; set; }
+
+        public string Contato { get; set; }
 
         [Required]
         public int Quantidade { get; set; }
 
         [Required, StringLength(30)]
-        public string Validade  { get; set; }
+        public string Validade { get; set; }
 
         [Required, StringLength(100)]
         public string DescricaoDoacao { get; set; }
-        
+
         [Required, StringLength(14)]
         public string CNPJ_Doador { get; set; }
-        
+
         [Required, StringLength(50)]
         public string Titulo { get; set; }
 
-        public NovaDoacaoDTO(string contato, int quantidade, string validade, string descricaoDoacao, string cnpj_doador, string titulo)
+        [Required, StringLength(500)]
+
+        public string Foto { get; set; }
+
+        public NovaDoacaoDTO(string contato, int quantidade, string validade, string descricaoDoacao, string cnpj_doador, string titulo, string foto)
         {
             Contato = contato;
             Quantidade = quantidade;
@@ -37,8 +41,10 @@ namespace Doaqui.src.dtos
             DescricaoDoacao = descricaoDoacao;
             CNPJ_Doador = cnpj_doador;
             Titulo = titulo;
+            Foto = foto;
         }
-        
+
+
     }
 
     /// <summary>
@@ -56,13 +62,13 @@ namespace Doaqui.src.dtos
         public string CNPJ_Doador { get; }
 
         [Required, StringLength(100)]
-        public string Contato{ get; set; }
-       
+        public string Contato { get; set; }
+
         [Required]
         public int Quantidade { get; set; }
 
         [Required, StringLength(30)]
-        public string Validade  { get; set; }
+        public string Validade { get; set; }
 
         [Required, StringLength(200)]
         public string DescricaoDoacao { get; set; }
@@ -71,16 +77,20 @@ namespace Doaqui.src.dtos
 
         public string Titulo { get; set; }
 
-        public AtualizarDoacaoDTO(int id, string cNPJ_Doador, string contato, int quantidade, string validade, string descricaoDoacao, string titulo)
+        [Required, StringLength(500)]
+
+        public string Foto { get; set; }
+
+        public AtualizarDoacaoDTO(int id, string cNPJ_Doador, string contato, int quantidade, string validade, string descricaoDoacao, string titulo, string foto)
         {
             Id = id;
-            Titulo = titulo;
             CNPJ_Doador = cNPJ_Doador;
             Contato = contato;
             Quantidade = quantidade;
             Validade = validade;
             DescricaoDoacao = descricaoDoacao;
+            Titulo = titulo;
+            Foto = foto;
         }
-        
     }
 }
